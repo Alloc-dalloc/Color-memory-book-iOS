@@ -20,7 +20,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let homeVC = HomeViewController()
+//        let signInVC = SignInViewController()
+
         let navController = UINavigationController(rootViewController: homeVC)
+        
         
         window?.rootViewController = navController
         

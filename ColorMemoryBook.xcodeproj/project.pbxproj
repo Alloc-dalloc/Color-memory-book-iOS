@@ -16,6 +16,7 @@
 		10B6544629E6F4D30053523F /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544529E6F4D30053523F /* UIView+.swift */; };
 		10B6544829E728D60053523F /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544729E728D60053523F /* UIViewController+.swift */; };
 		10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544929E73C2C0053523F /* SignInViewController.swift */; };
+		10B6544C29E74CC40053523F /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544B29E74CC40053523F /* UIColor+.swift */; };
 		10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358E329E698E2004AEE4B /* MemoryBookCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		10B6544529E6F4D30053523F /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		10B6544729E728D60053523F /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		10B6544929E73C2C0053523F /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		10B6544B29E74CC40053523F /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		10D358E329E698E2004AEE4B /* MemoryBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemoryBookCell.swift; path = ColorMemoryBook/Sources/Cells/MemoryBookCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -146,6 +148,7 @@
 			children = (
 				10B6544529E6F4D30053523F /* UIView+.swift */,
 				10B6544729E728D60053523F /* UIViewController+.swift */,
+				10B6544B29E74CC40053523F /* UIColor+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10B6544829E728D60053523F /* UIViewController+.swift in Sources */,
+				10B6544C29E74CC40053523F /* UIColor+.swift in Sources */,
 				10B6544629E6F4D30053523F /* UIView+.swift in Sources */,
 				10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */,
 				10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */,
