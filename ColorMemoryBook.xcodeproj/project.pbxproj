@@ -7,20 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A838E929E6882D0027AFDA /* HomeViewController.swift */; };
+		10A838ED29E68F290027AFDA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 10A838EC29E68F290027AFDA /* SnapKit */; };
 		10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B46EF029DD7533004273EB /* AppDelegate.swift */; };
 		10B46EF329DD7533004273EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B46EF229DD7533004273EB /* SceneDelegate.swift */; };
 		10B46EF529DD7533004273EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B46EF429DD7533004273EB /* ViewController.swift */; };
-		10B46EF829DD7533004273EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10B46EF629DD7533004273EB /* Main.storyboard */; };
 		10B46EFA29DD7534004273EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10B46EF929DD7534004273EB /* Assets.xcassets */; };
 		10B46EFD29DD7534004273EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10B46EFB29DD7534004273EB /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10A838E929E6882D0027AFDA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		10B46EED29DD7533004273EB /* ColorMemoryBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorMemoryBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10B46EF029DD7533004273EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10B46EF229DD7533004273EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		10B46EF429DD7533004273EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		10B46EF729DD7533004273EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		10B46EF929DD7534004273EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10B46EFC29DD7534004273EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		10B46EFE29DD7534004273EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -31,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10A838ED29E68F290027AFDA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +68,7 @@
 		10B46F0429DD7684004273EB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				10B46EF929DD7534004273EB /* Assets.xcassets */,
 				10B46EF229DD7533004273EB /* SceneDelegate.swift */,
 				10B46EF029DD7533004273EB /* AppDelegate.swift */,
 				10B46F0629DD76C6004273EB /* Storyboards */,
@@ -89,8 +92,6 @@
 		10B46F0629DD76C6004273EB /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				10B46EF929DD7534004273EB /* Assets.xcassets */,
-				10B46EF629DD7533004273EB /* Main.storyboard */,
 				10B46EFB29DD7534004273EB /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
@@ -106,6 +107,7 @@
 		10B46F0829DD76E3004273EB /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				10A838E929E6882D0027AFDA /* HomeViewController.swift */,
 				10B46EF429DD7533004273EB /* ViewController.swift */,
 			);
 			path = VCs;
@@ -155,6 +157,9 @@
 			dependencies = (
 			);
 			name = ColorMemoryBook;
+			packageProductDependencies = (
+				10A838EC29E68F290027AFDA /* SnapKit */,
+			);
 			productName = ColorMemoryBook;
 			productReference = 10B46EED29DD7533004273EB /* ColorMemoryBook.app */;
 			productType = "com.apple.product-type.application";
@@ -183,6 +188,9 @@
 				Base,
 			);
 			mainGroup = 10B46EE429DD7533004273EB;
+			packageReferences = (
+				10A838EB29E68F290027AFDA /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 10B46EEE29DD7533004273EB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -199,7 +207,6 @@
 			files = (
 				10B46EFD29DD7534004273EB /* LaunchScreen.storyboard in Resources */,
 				10B46EFA29DD7534004273EB /* Assets.xcassets in Resources */,
-				10B46EF829DD7533004273EB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,20 +220,13 @@
 				10B46EF529DD7533004273EB /* ViewController.swift in Sources */,
 				10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */,
 				10B46EF329DD7533004273EB /* SceneDelegate.swift in Sources */,
+				10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		10B46EF629DD7533004273EB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				10B46EF729DD7533004273EB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		10B46EFB29DD7534004273EB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -363,10 +363,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ColorMemoryBook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -391,10 +391,10 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ColorMemoryBook/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -430,6 +430,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		10A838EB29E68F290027AFDA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		10A838EC29E68F290027AFDA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10A838EB29E68F290027AFDA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 10B46EE529DD7533004273EB /* Project object */;
 }
