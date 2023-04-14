@@ -17,6 +17,7 @@
 		10B6544829E728D60053523F /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544729E728D60053523F /* UIViewController+.swift */; };
 		10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544929E73C2C0053523F /* SignInViewController.swift */; };
 		10B6544C29E74CC40053523F /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544B29E74CC40053523F /* UIColor+.swift */; };
+		10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544D29E99B6F0053523F /* CameraViewController.swift */; };
 		10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358E329E698E2004AEE4B /* MemoryBookCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +33,7 @@
 		10B6544729E728D60053523F /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		10B6544929E73C2C0053523F /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		10B6544B29E74CC40053523F /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		10B6544D29E99B6F0053523F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		10D358E329E698E2004AEE4B /* MemoryBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemoryBookCell.swift; path = ColorMemoryBook/Sources/Cells/MemoryBookCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -118,6 +120,7 @@
 			children = (
 				10B6544929E73C2C0053523F /* SignInViewController.swift */,
 				10A838E929E6882D0027AFDA /* HomeViewController.swift */,
+				10B6544D29E99B6F0053523F /* CameraViewController.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */,
 				10B46EF329DD7533004273EB /* SceneDelegate.swift in Sources */,
 				10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */,
+				10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */,
 				10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
