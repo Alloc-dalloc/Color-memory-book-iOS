@@ -45,7 +45,7 @@ class HomeViewController: UIViewController {
         
     let floatingButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "floating_button"), for: .normal)
+        button.setImage(UIImage(named: "floating_blue"), for: .normal)
         return button
     }()
     
