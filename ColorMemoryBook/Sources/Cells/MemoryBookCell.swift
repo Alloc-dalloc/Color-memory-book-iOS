@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class MemoryBookCell: UICollectionViewCell{
+final class MemoryBookCell: UICollectionViewCell{
     
-    let thumbnailImageView: UIImageView = {
+    private let thumbnailImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -23,7 +23,6 @@ class MemoryBookCell: UICollectionViewCell{
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(thumbnailImageView)
-        
         thumbnailImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

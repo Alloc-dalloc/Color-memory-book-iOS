@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		109F480229EA899D00153C80 /* BaseVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F480129EA899D00153C80 /* BaseVIewController.swift */; };
+		109F480429EA8ED900153C80 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F480329EA8ED900153C80 /* UICollectionView+.swift */; };
 		10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A838E929E6882D0027AFDA /* HomeViewController.swift */; };
 		10A838ED29E68F290027AFDA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 10A838EC29E68F290027AFDA /* SnapKit */; };
 		10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B46EF029DD7533004273EB /* AppDelegate.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		109F480129EA899D00153C80 /* BaseVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVIewController.swift; sourceTree = "<group>"; };
+		109F480329EA8ED900153C80 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		10A838E929E6882D0027AFDA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		10B46EED29DD7533004273EB /* ColorMemoryBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorMemoryBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10B46EF029DD7533004273EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 		10B46F0829DD76E3004273EB /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				109F480129EA899D00153C80 /* BaseVIewController.swift */,
 				10B6544929E73C2C0053523F /* SignInViewController.swift */,
 				10A838E929E6882D0027AFDA /* HomeViewController.swift */,
 				10B6544D29E99B6F0053523F /* CameraViewController.swift */,
@@ -152,6 +157,7 @@
 				10B6544529E6F4D30053523F /* UIView+.swift */,
 				10B6544729E728D60053523F /* UIViewController+.swift */,
 				10B6544B29E74CC40053523F /* UIColor+.swift */,
+				109F480329EA8ED900153C80 /* UICollectionView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -241,8 +247,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				10B6544829E728D60053523F /* UIViewController+.swift in Sources */,
+				109F480229EA899D00153C80 /* BaseVIewController.swift in Sources */,
 				10B6544C29E74CC40053523F /* UIColor+.swift in Sources */,
 				10B6544629E6F4D30053523F /* UIView+.swift in Sources */,
+				109F480429EA8ED900153C80 /* UICollectionView+.swift in Sources */,
 				10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */,
 				10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */,
 				10B46EF329DD7533004273EB /* SceneDelegate.swift in Sources */,

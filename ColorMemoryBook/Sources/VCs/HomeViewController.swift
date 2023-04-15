@@ -8,118 +8,120 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: UIViewController {
-
-    let logoImageView: UIImageView = {
+class HomeViewController: BaseViewController {
+    
+    private let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-    let profileButton: UIButton = {
-        let button = UIButton(type: .system)
+    private let profileButton: UIButton = {
+        let button = UIButton()
         button.setImage(UIImage(named: "profile"), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
-    let tagSearchTextField: UITextField = {
-       let textField = UITextField()
+    private var tagSearchTextField: UITextField = {
+        let textField = UITextField()
         textField.placeholder = "태그를 검색하세요."
         textField.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
         textField.borderStyle = .roundedRect
         return textField
     }()
     
-    let searchImageView: UIImageView = {
+    private let searchImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "search"))
         imageView.contentMode = .scaleAspectFit
         imageView.frame = CGRect(x: 10, y: 0, width: 24, height: 24)
         return imageView
     }()
     
-    let searchView: UIView = {
-       let view = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 24))
-       return view
+    private let searchView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 24))
+        return view
     }()
-        
-    let floatingButton: UIButton = {
+    
+    private let clearButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "clear_button"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
+        return button
+    }()
+    
+    private let floatingButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "floating_blue"), for: .normal)
         return button
     }()
     
-    var collectionView: UICollectionView!
+    private(set) lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 16
+        layout.minimumInteritemSpacing = 12
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.contentInset = .init(top: .zero, left: .zero, bottom: 60, right: .zero)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(cell: MemoryBookCell.self)
+        return collectionView
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.view.backgroundColor = UIColor.white
-
-        // Set navigation bar background color
-        navigationController?.navigationBar.barTintColor = .white
-        
-        // Add logo image view to navigation bar
-        let logoBarButtonItem = UIBarButtonItem(customView: logoImageView)
-        navigationItem.leftBarButtonItems = [logoBarButtonItem]
-        
-        // Add profile button to navigation bar
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
-        
-        // Layout the profile button
+        searchView.addSubview(searchImageView)
+        setLayouts()
+        setNavigationBar()
+        setTextFiled()
+    }
+    
+    override func setLayouts() {
+        self.view.addSubviews(tagSearchTextField, collectionView, floatingButton)
         profileButton.snp.makeConstraints { make in
             make.width.equalTo(32)
             make.height.equalTo(32)
         }
-        // Layout the logo image view
         logoImageView.snp.makeConstraints { make in
             make.width.equalTo(86)
             make.height.equalTo(32)
         }
-        
-        // Set left view of text field to search icon image view
-        searchView.addSubview(searchImageView)
-        tagSearchTextField.leftView = searchView
-        tagSearchTextField.leftViewMode = .always
-
-        // Add text field to view and layout
-        self.view.addSubview(tagSearchTextField)
         tagSearchTextField.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(104)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(44)
         }
-                
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 16
-        layout.minimumInteritemSpacing = 12
-        
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.register(MemoryBookCell.self, forCellWithReuseIdentifier: "cell")
-        self.view.addSubview(collectionView)
-        
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(tagSearchTextField.snp.bottom).offset(20)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalToSuperview()
-
         }
         
-        self.view.addSubview(floatingButton)
         floatingButton.snp.makeConstraints { make in
             make.width.equalTo(60)
             make.height.equalTo(60)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-11)
-            make.right.equalTo(view.safeAreaLayoutGuide.snp.right).offset(-11)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-11)
         }
-        
+    }
+    
+    func setNavigationBar(){
+        navigationController?.navigationBar.barTintColor = .white
+        let logoBarButtonItem = UIBarButtonItem(customView: logoImageView)
+        navigationItem.leftBarButtonItems = [logoBarButtonItem]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
+    }
+    
+    func setTextFiled(){
+        tagSearchTextField.leftView = searchView
+        tagSearchTextField.leftViewMode = .always
+        tagSearchTextField.rightView = clearButton
+        tagSearchTextField.rightViewMode = .whileEditing
     }
 }
 
@@ -130,7 +132,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MemoryBookCell
+        let cell: MemoryBookCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
         return cell
     }
     
@@ -138,14 +140,12 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         let width = collectionView.bounds.width / 2 - 8
         return CGSize(width: width, height: 211)
     }
-    
 }
-
 
 #if DEBUG
 import SwiftUI
 
-struct ContentView_Previews: PreviewProvider {
+struct HomeViewController_Previews: PreviewProvider {
     static var previews: some View {
         let viewController = HomeViewController()
         return viewController.getPreview()

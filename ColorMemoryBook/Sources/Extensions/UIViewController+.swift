@@ -16,6 +16,7 @@ extension UIViewController {
     func getPreview() -> some View {
         UIViewControllerPreview(self)
     }
+    
 }
 
 @available(iOS 13.0, *)

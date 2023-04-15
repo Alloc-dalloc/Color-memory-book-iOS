@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIColor {
+    
     convenience init?(hex: String, alpha: CGFloat = 1.0) {
         var hexWithoutSymbol = hex
         if hexWithoutSymbol.hasPrefix("#") {

@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let homeVC = HomeViewController()
-//        let signInVC = SignInViewController()
+        let signInVC = SignInViewController()
 
         let navController = UINavigationController(rootViewController: homeVC)
         
@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navController
         
         window?.makeKeyAndVisible()
-        
+    
         window?.windowScene = windowScene
     }
 
