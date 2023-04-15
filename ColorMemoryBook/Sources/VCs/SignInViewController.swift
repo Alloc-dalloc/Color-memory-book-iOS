@@ -26,13 +26,10 @@ class SignInViewController : BaseViewController{
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
-  
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.ohsogo_Blue
-        setLayouts()
     }
     
     override func setLayouts() {

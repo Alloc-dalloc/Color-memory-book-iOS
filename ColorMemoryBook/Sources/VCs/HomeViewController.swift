@@ -72,11 +72,12 @@ class HomeViewController: BaseViewController {
         return collectionView
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchView.addSubview(searchImageView)
-        setLayouts()
+        
+        //얘네를 이렇게 함수로 빼서, viewDidLoad()에서 호출하는게 맞,,
+        //함수명도 좀 명확하지 않은듯
         setNavigationBar()
         setTextFiled()
     }
@@ -122,6 +123,7 @@ class HomeViewController: BaseViewController {
         tagSearchTextField.leftViewMode = .always
         tagSearchTextField.rightView = clearButton
         tagSearchTextField.rightViewMode = .whileEditing
+        //한번 포커싱되면 텍스트 없어도 x버튼 나타남, 다른 걸로 바꿔야
     }
 }
 
