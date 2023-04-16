@@ -11,7 +11,7 @@ class BaseViewController : UIViewController{
     
     init(){
         super.init(nibName: nil, bundle: nil)
-        setLayouts()
+//        print(#fileID, #function, #line, "- ")
     }
     
     required init?(coder: NSCoder) {
@@ -21,10 +21,10 @@ class BaseViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
-
+        setLayouts()
+//        print(#fileID, #function, #line, "- ")
     }
     
     func setLayouts(){}
-
     
 }

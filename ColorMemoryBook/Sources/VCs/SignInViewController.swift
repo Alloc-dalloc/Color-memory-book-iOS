@@ -2,7 +2,7 @@
 //  SignInViewController.swift
 //  ColorMemoryBook
 //
-//  Created by 임영준 on 2023/04/13.
+//  Created by 김윤서 on 2023/04/13.
 //
 
 import UIKit
@@ -26,10 +26,21 @@ class SignInViewController : BaseViewController{
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(#fileID, #function, #line, "- ")
+    }
+    
+    override init(){
+        super.init()
         view.backgroundColor = UIColor.ohsogo_Blue
+        print(#fileID, #function, #line, "- ")
+
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func setLayouts() {

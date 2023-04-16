@@ -72,14 +72,12 @@ class HomeViewController: BaseViewController {
         return collectionView
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchView.addSubview(searchImageView)
-        
-        //얘네를 이렇게 함수로 빼서, viewDidLoad()에서 호출하는게 맞,,
-        //함수명도 좀 명확하지 않은듯
         setNavigationBar()
-        setTextFiled()
+        setTagSearchTextField()
+//        print(#fileID, #function, #line, "- ")
     }
     
     override func setLayouts() {
@@ -118,7 +116,8 @@ class HomeViewController: BaseViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: profileButton)
     }
     
-    func setTextFiled(){
+    func setTagSearchTextField(){
+        searchView.addSubview(searchImageView)
         tagSearchTextField.leftView = searchView
         tagSearchTextField.leftViewMode = .always
         tagSearchTextField.rightView = clearButton
