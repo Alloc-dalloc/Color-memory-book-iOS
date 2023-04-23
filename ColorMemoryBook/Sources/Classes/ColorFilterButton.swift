@@ -22,7 +22,6 @@ final class ColorFilterButton: UIButton {
     }
     
     private func setLayouts(){
-        print(#fileID, #function, #line, "- ")
         self.snp.makeConstraints {
             $0.height.equalTo(30)
             $0.width.equalTo(30)

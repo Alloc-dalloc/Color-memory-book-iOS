@@ -8,6 +8,8 @@
 
 class HomeViewController: BaseViewController {
     
+    let viewModel = HomeViewModel()
+    
     private let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.contentMode = .scaleAspectFit
@@ -54,6 +56,10 @@ class HomeViewController: BaseViewController {
         button.setImage(UIImage(named: "floating_blue"), for: .normal)
         return button
     }()
+    
+    private let selectedFloatingButton = UIButton().then{
+        $0.setImage(UIImage(named: "floating_black"), for: .normal)
+    }
     
     private(set) lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
