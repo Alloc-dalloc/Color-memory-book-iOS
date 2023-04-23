@@ -7,7 +7,7 @@
 
 import AVFoundation
 
-class CameraViewController: BaseViewController {
+class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     private let captureSession = AVCaptureSession()
     private let photoOutput = AVCapturePhotoOutput()
@@ -200,50 +200,17 @@ class CameraViewController: BaseViewController {
     }
 }
 
-extension CameraViewController: AVCapturePhotoCaptureDelegate, AVCaptureVideoDataOutputSampleBufferDelegate{
+extension CameraViewController: AVCapturePhotoCaptureDelegate{
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard let imageData = photo.fileDataRepresentation() else {
             print("이미지 데이터를 가져올 수 없습니다.")
             return
         }
-        
         let image = UIImage(data: imageData)
         capturedImageView.image = image
         capturedImageView.isHidden = false
         capturedImageView.isHidden = true
-    }
-    
-    func applyFilterToImage(_ image: CIImage) -> CIImage? {
-        let hueValue: CGFloat = 0.5 // 색상 값 (0 ~ 1)
-        
-        // CIHueAdjust 필터 생성
-        guard let hueFilter = CIFilter(name: "CIHueAdjust") else { return nil }
-        hueFilter.setValue(image, forKey: kCIInputImageKey)
-        hueFilter.setValue(hueValue * CGFloat.pi, forKey: kCIInputAngleKey) // 180도 회전
-        
-        // 필터 적용
-        guard let filteredImage = hueFilter.outputImage else { return nil }
-        return filteredImage
-    }
-
-    // captureOutput(_:didOutput:from:) 메서드 내에서 필터 적용 및 화면에 표시
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        let image = CIImage(cvImageBuffer: pixelBuffer)
-        
-        // 필터 적용
-        if let filteredImage = applyFilterToImage(image) {
-            // 필터가 적용된 이미지를 화면에 표시
-            let context = CIContext()
-            if let cgImage = context.createCGImage(filteredImage, from: filteredImage.extent) {
-                let filteredUIImage = UIImage(cgImage: cgImage)
-                DispatchQueue.main.async {
-                    // UI 업데이트는 메인 스레드에서 수행되어야 함
-                    self.previewLayer.contents = filteredUIImage.cgImage // imageView에 이미지 표시
-                }
-            }
-        }
     }
 }
 
