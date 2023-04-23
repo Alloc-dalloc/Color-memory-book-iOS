@@ -7,24 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		109F480229EA899D00153C80 /* BaseVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F480129EA899D00153C80 /* BaseVIewController.swift */; };
+		109F480429EA8ED900153C80 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F480329EA8ED900153C80 /* UICollectionView+.swift */; };
 		10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A838E929E6882D0027AFDA /* HomeViewController.swift */; };
 		10A838ED29E68F290027AFDA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 10A838EC29E68F290027AFDA /* SnapKit */; };
 		10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B46EF029DD7533004273EB /* AppDelegate.swift */; };
 		10B46EF329DD7533004273EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B46EF229DD7533004273EB /* SceneDelegate.swift */; };
-		10B46EF529DD7533004273EB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B46EF429DD7533004273EB /* ViewController.swift */; };
 		10B46EFA29DD7534004273EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10B46EF929DD7534004273EB /* Assets.xcassets */; };
 		10B46EFD29DD7534004273EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10B46EFB29DD7534004273EB /* LaunchScreen.storyboard */; };
+		10B6544629E6F4D30053523F /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544529E6F4D30053523F /* UIView+.swift */; };
+		10B6544829E728D60053523F /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544729E728D60053523F /* UIViewController+.swift */; };
+		10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544929E73C2C0053523F /* SignInViewController.swift */; };
+		10B6544C29E74CC40053523F /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544B29E74CC40053523F /* UIColor+.swift */; };
+		10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544D29E99B6F0053523F /* CameraViewController.swift */; };
+		10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358E329E698E2004AEE4B /* MemoryBookCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		109F480129EA899D00153C80 /* BaseVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVIewController.swift; sourceTree = "<group>"; };
+		109F480329EA8ED900153C80 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		10A838E929E6882D0027AFDA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		10B46EED29DD7533004273EB /* ColorMemoryBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorMemoryBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10B46EF029DD7533004273EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10B46EF229DD7533004273EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		10B46EF429DD7533004273EB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		10B46EF929DD7534004273EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		10B46EFC29DD7534004273EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		10B46EFE29DD7534004273EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		10B6544529E6F4D30053523F /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		10B6544729E728D60053523F /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		10B6544929E73C2C0053523F /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		10B6544B29E74CC40053523F /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		10B6544D29E99B6F0053523F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		10D358E329E698E2004AEE4B /* MemoryBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemoryBookCell.swift; path = ColorMemoryBook/Sources/Cells/MemoryBookCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +94,10 @@
 		10B46F0529DD7699004273EB /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				10B6544429E6F4C00053523F /* Cells */,
+				10B6544329E6F4530053523F /* Extensions */,
 				10B46F0829DD76E3004273EB /* VCs */,
 				10B46F0929DD76EE004273EB /* Classes */,
-				10B46F0A29DD76F7004273EB /* Cells */,
 				10B46F0B29DD7703004273EB /* Designs */,
 				10B46F0C29DD770C004273EB /* Models */,
 			);
@@ -107,8 +122,10 @@
 		10B46F0829DD76E3004273EB /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				109F480129EA899D00153C80 /* BaseVIewController.swift */,
+				10B6544929E73C2C0053523F /* SignInViewController.swift */,
 				10A838E929E6882D0027AFDA /* HomeViewController.swift */,
-				10B46EF429DD7533004273EB /* ViewController.swift */,
+				10B6544D29E99B6F0053523F /* CameraViewController.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -118,13 +135,6 @@
 			children = (
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		10B46F0A29DD76F7004273EB /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		10B46F0B29DD7703004273EB /* Designs */ = {
@@ -139,6 +149,25 @@
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		10B6544329E6F4530053523F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				10B6544529E6F4D30053523F /* UIView+.swift */,
+				10B6544729E728D60053523F /* UIViewController+.swift */,
+				10B6544B29E74CC40053523F /* UIColor+.swift */,
+				109F480329EA8ED900153C80 /* UICollectionView+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		10B6544429E6F4C00053523F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				10D358E329E698E2004AEE4B /* MemoryBookCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,9 +246,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10B46EF529DD7533004273EB /* ViewController.swift in Sources */,
+				10B6544829E728D60053523F /* UIViewController+.swift in Sources */,
+				109F480229EA899D00153C80 /* BaseVIewController.swift in Sources */,
+				10B6544C29E74CC40053523F /* UIColor+.swift in Sources */,
+				10B6544629E6F4D30053523F /* UIView+.swift in Sources */,
+				109F480429EA8ED900153C80 /* UICollectionView+.swift in Sources */,
 				10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */,
+				10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */,
 				10B46EF329DD7533004273EB /* SceneDelegate.swift in Sources */,
+				10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */,
+				10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */,
 				10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
