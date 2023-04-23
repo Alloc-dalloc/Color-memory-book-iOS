@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import SnapKit
+import RxSwift
+import RxCocoa
+import Then
 
 class BaseViewController : UIViewController{
     
+    var disposeBag = DisposeBag()
+
     init(){
         super.init(nibName: nil, bundle: nil)
-//        print(#fileID, #function, #line, "- ")
     }
     
     required init?(coder: NSCoder) {
@@ -20,11 +25,11 @@ class BaseViewController : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = .white
         setLayouts()
-//        print(#fileID, #function, #line, "- ")
+        bind()
     }
     
     func setLayouts(){}
-    
+    func bind(){}
 }

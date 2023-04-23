@@ -5,8 +5,6 @@
 //  Created by 임영준 on 2023/04/12.
 //
 
-import UIKit
-import SnapKit
 
 class HomeViewController: BaseViewController {
     
@@ -75,9 +73,6 @@ class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar()
-        setTagSearchTextField()
-//        print(#fileID, #function, #line, "- ")
     }
     
     override func setLayouts() {
@@ -107,6 +102,9 @@ class HomeViewController: BaseViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-11)
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-11)
         }
+        
+        setNavigationBar()
+        setTagSearchTextField()
     }
     
     func setNavigationBar(){
@@ -124,6 +122,7 @@ class HomeViewController: BaseViewController {
         tagSearchTextField.rightViewMode = .whileEditing
         //한번 포커싱되면 텍스트 없어도 x버튼 나타남, 다른 걸로 바꿔야
     }
+    
 }
 
  
