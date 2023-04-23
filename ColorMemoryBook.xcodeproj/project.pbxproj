@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1050ACD329F14A2A00C9F1E4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1050ACD229F14A2A00C9F1E4 /* Then */; };
+		105DE53229ED359D00FE4321 /* ColorFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105DE53129ED359D00FE4321 /* ColorFilterButton.swift */; };
 		109F480229EA899D00153C80 /* BaseVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F480129EA899D00153C80 /* BaseVIewController.swift */; };
 		109F480429EA8ED900153C80 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F480329EA8ED900153C80 /* UICollectionView+.swift */; };
 		10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A838E929E6882D0027AFDA /* HomeViewController.swift */; };
@@ -20,10 +22,14 @@
 		10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544929E73C2C0053523F /* SignInViewController.swift */; };
 		10B6544C29E74CC40053523F /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544B29E74CC40053523F /* UIColor+.swift */; };
 		10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544D29E99B6F0053523F /* CameraViewController.swift */; };
+		10CC68A229F0036F006C939C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 10CC68A129F0036F006C939C /* RxCocoa */; };
+		10CC68A429F0036F006C939C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10CC68A329F0036F006C939C /* RxSwift */; };
+		10D1EA4E29EE80EE00BF4251 /* tmp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D1EA4D29EE80EE00BF4251 /* tmp.swift */; };
 		10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358E329E698E2004AEE4B /* MemoryBookCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		105DE53129ED359D00FE4321 /* ColorFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFilterButton.swift; sourceTree = "<group>"; };
 		109F480129EA899D00153C80 /* BaseVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVIewController.swift; sourceTree = "<group>"; };
 		109F480329EA8ED900153C80 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		10A838E929E6882D0027AFDA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -37,7 +43,8 @@
 		10B6544729E728D60053523F /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		10B6544929E73C2C0053523F /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		10B6544B29E74CC40053523F /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
-		10B6544D29E99B6F0053523F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		10B6544D29E99B6F0053523F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		10D1EA4D29EE80EE00BF4251 /* tmp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tmp.swift; sourceTree = "<group>"; };
 		10D358E329E698E2004AEE4B /* MemoryBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemoryBookCell.swift; path = ColorMemoryBook/Sources/Cells/MemoryBookCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -46,13 +53,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10CC68A429F0036F006C939C /* RxSwift in Frameworks */,
+				10CC68A229F0036F006C939C /* RxCocoa in Frameworks */,
 				10A838ED29E68F290027AFDA /* SnapKit in Frameworks */,
+				1050ACD329F14A2A00C9F1E4 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		105DE53029ED358D00FE4321 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				105DE53129ED359D00FE4321 /* ColorFilterButton.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
 		10B46EE429DD7533004273EB = {
 			isa = PBXGroup;
 			children = (
@@ -94,10 +112,10 @@
 		10B46F0529DD7699004273EB /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				105DE53029ED358D00FE4321 /* Classes */,
 				10B6544429E6F4C00053523F /* Cells */,
 				10B6544329E6F4530053523F /* Extensions */,
-				10B46F0829DD76E3004273EB /* VCs */,
-				10B46F0929DD76EE004273EB /* Classes */,
+				10B46F0829DD76E3004273EB /* View */,
 				10B46F0B29DD7703004273EB /* Designs */,
 				10B46F0C29DD770C004273EB /* Models */,
 			);
@@ -119,22 +137,16 @@
 			path = APIServices;
 			sourceTree = "<group>";
 		};
-		10B46F0829DD76E3004273EB /* VCs */ = {
+		10B46F0829DD76E3004273EB /* View */ = {
 			isa = PBXGroup;
 			children = (
 				109F480129EA899D00153C80 /* BaseVIewController.swift */,
 				10B6544929E73C2C0053523F /* SignInViewController.swift */,
 				10A838E929E6882D0027AFDA /* HomeViewController.swift */,
 				10B6544D29E99B6F0053523F /* CameraViewController.swift */,
+				10D1EA4D29EE80EE00BF4251 /* tmp.swift */,
 			);
-			path = VCs;
-			sourceTree = "<group>";
-		};
-		10B46F0929DD76EE004273EB /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Classes;
+			path = View;
 			sourceTree = "<group>";
 		};
 		10B46F0B29DD7703004273EB /* Designs */ = {
@@ -188,6 +200,9 @@
 			name = ColorMemoryBook;
 			packageProductDependencies = (
 				10A838EC29E68F290027AFDA /* SnapKit */,
+				10CC68A129F0036F006C939C /* RxCocoa */,
+				10CC68A329F0036F006C939C /* RxSwift */,
+				1050ACD229F14A2A00C9F1E4 /* Then */,
 			);
 			productName = ColorMemoryBook;
 			productReference = 10B46EED29DD7533004273EB /* ColorMemoryBook.app */;
@@ -219,6 +234,8 @@
 			mainGroup = 10B46EE429DD7533004273EB;
 			packageReferences = (
 				10A838EB29E68F290027AFDA /* XCRemoteSwiftPackageReference "SnapKit" */,
+				10CC68A029F0036F006C939C /* XCRemoteSwiftPackageReference "RxSwift" */,
+				1050ACD129F14A2A00C9F1E4 /* XCRemoteSwiftPackageReference "Then" */,
 			);
 			productRefGroup = 10B46EEE29DD7533004273EB /* Products */;
 			projectDirPath = "";
@@ -253,6 +270,8 @@
 				109F480429EA8ED900153C80 /* UICollectionView+.swift in Sources */,
 				10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */,
 				10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */,
+				10D1EA4E29EE80EE00BF4251 /* tmp.swift in Sources */,
+				105DE53229ED359D00FE4321 /* ColorFilterButton.swift in Sources */,
 				10B46EF329DD7533004273EB /* SceneDelegate.swift in Sources */,
 				10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */,
 				10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */,
@@ -398,6 +417,7 @@
 				DEVELOPMENT_TEAM = 6UJYJPDXP4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ColorMemoryBook/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -426,6 +446,7 @@
 				DEVELOPMENT_TEAM = 6UJYJPDXP4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ColorMemoryBook/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 사용 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -468,6 +489,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1050ACD129F14A2A00C9F1E4 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		10A838EB29E68F290027AFDA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -476,13 +505,36 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		10CC68A029F0036F006C939C /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1050ACD229F14A2A00C9F1E4 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1050ACD129F14A2A00C9F1E4 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
 		10A838EC29E68F290027AFDA /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 10A838EB29E68F290027AFDA /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		10CC68A129F0036F006C939C /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10CC68A029F0036F006C939C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		10CC68A329F0036F006C939C /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10CC68A029F0036F006C939C /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
