@@ -14,7 +14,7 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
     private let previewLayer = AVCaptureVideoPreviewLayer()
     let videoDataOutput = AVCaptureVideoDataOutput()
 
-    let buttons = [ColorFilterButton(color: .red), ColorFilterButton(color: .green), ColorFilterButton(color: .blue)]
+    private let buttons = [ColorFilterButton(color: .red), ColorFilterButton(color: .green), ColorFilterButton(color: .blue)]
 
     private let titleBackgroundView = UIView().then{
         $0.backgroundColor = .black
@@ -80,8 +80,6 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
         }
     }
     
-
-    
     override func setLayouts() {
         
         self.view.addSubviews(previewBackgroundView,titleBackgroundView, colorStackView, captureBackgroundView)
@@ -137,23 +135,9 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
         }
     }
     
-    private func setupColorFilterButton(){
-        for button in buttons {
-            button.addTarget(self, action: #selector(colorFilterButtonDidTap), for: .touchUpInside)
-            colorStackView.addArrangedSubview(button)
-        }
-    }
-    
     @objc private func colorFilterButtonDidTap(_ sender: UIButton){
         for button in buttons {
-            if button == sender {
-                button.layer.borderColor = UIColor.white.cgColor
-            } else {
-                button.layer.borderColor = UIColor.clear.cgColor
-            }
-            
             if button.isSelected && button == sender {
-                button.layer.borderColor = UIColor.clear.cgColor
                 button.isSelected = false
             } else {
                 button.isSelected = (button == sender)

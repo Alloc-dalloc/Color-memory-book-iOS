@@ -10,14 +10,12 @@ import SnapKit
 
 final class ColorFilterButton: UIButton {
     
-    var buttonColor = UIColor()
+    let buttonColor : UIColor
     
     init(color: UIColor){
-        super.init(frame: .zero)
         self.buttonColor = color
-        self.backgroundColor = buttonColor
-        self.layer.borderWidth = 2
-        self.layer.borderColor = UIColor.clear.cgColor
+        super.init(frame: .zero)
+        setProperties()
         setLayouts()
     }
     
@@ -28,10 +26,22 @@ final class ColorFilterButton: UIButton {
         }
     }
     
+    private func setProperties(){
+        self.backgroundColor = buttonColor
+        self.layer.borderWidth = 2
+        self.layer.borderColor = UIColor.clear.cgColor
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         self.clipsToBounds = true
         self.layer.cornerRadius = self.frame.width / 2
+    }
+    
+    override var isSelected: Bool {
+        didSet{
+            layer.borderColor = isSelected ? UIColor.white.cgColor : UIColor.clear.cgColor
+        }
     }
     
     @available(*, unavailable)
