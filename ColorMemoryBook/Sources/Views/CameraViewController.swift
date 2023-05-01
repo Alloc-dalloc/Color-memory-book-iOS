@@ -2,7 +2,7 @@
 //  File.swift
 //  ColorMemoryBook
 //
-//  Created by 임영준 on 2023/04/14.
+//  Created by 김윤서 on 2023/04/14.
 //
 
 import AVFoundation
@@ -36,7 +36,7 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
     }
     
     private lazy var colorStackView = UIStackView().then {
-        $0.alignment = .center
+        $0.alignment = .center 
         $0.axis = .horizontal
         $0.distribution = .equalSpacing
         $0.spacing = 40
@@ -71,6 +71,7 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
         super.viewDidLoad()
         view.backgroundColor = .black
         setupCaptureSession()
+        dismissButton.addTarget(self, action: #selector(dismissButtonDidTap), for: .touchUpInside)
     }
     
     private func setupColorFilterButtons(){
@@ -135,6 +136,7 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
         }
     }
     
+    
     @objc private func colorFilterButtonDidTap(_ sender: UIButton){
         for button in buttons {
             if button.isSelected && button == sender {
@@ -143,6 +145,10 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
                 button.isSelected = (button == sender)
             }
         }
+    }
+    
+    @objc private func dismissButtonDidTap(){
+        self.dismiss(animated: true)
     }
     
     private func setupCaptureSession() {

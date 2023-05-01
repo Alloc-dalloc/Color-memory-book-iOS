@@ -10,12 +10,13 @@ import UIKit
 
 final class MemoryBookCell: UICollectionViewCell{
     
+    var thumbnailImage: UIImage!
+    
     private let thumbnailImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 8
-        imageView.image = UIImage(named: "tmp")
         imageView.backgroundColor = UIColor.lightGray
         return imageView
     }()
@@ -26,13 +27,16 @@ final class MemoryBookCell: UICollectionViewCell{
         thumbnailImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    func configure(with image: UIImage) {
+        thumbnailImage = image
+        thumbnailImageView.image = thumbnailImage
+    }
 }
  
 #if DEBUG

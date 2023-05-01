@@ -27,7 +27,6 @@ class SignInViewController : BaseViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(#fileID, #function, #line, "- ")
     }
     
     override init(){

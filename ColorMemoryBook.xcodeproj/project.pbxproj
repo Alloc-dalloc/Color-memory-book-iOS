@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1050ACD329F14A2A00C9F1E4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1050ACD229F14A2A00C9F1E4 /* Then */; };
-		1050ACD729F500C700C9F1E4 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050ACD629F500C700C9F1E4 /* HomeViewModel.swift */; };
+		1050ACD729F500C700C9F1E4 /* MemoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050ACD629F500C700C9F1E4 /* MemoryModel.swift */; };
 		1050ACD929F5030100C9F1E4 /* HiddenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050ACD829F5030100C9F1E4 /* HiddenButton.swift */; };
+		1050ACDE29F547CA00C9F1E4 /* MemoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050ACDD29F547CA00C9F1E4 /* MemoryListViewModel.swift */; };
 		105DE53229ED359D00FE4321 /* ColorFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105DE53129ED359D00FE4321 /* ColorFilterButton.swift */; };
 		109F480229EA899D00153C80 /* BaseVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F480129EA899D00153C80 /* BaseVIewController.swift */; };
 		109F480429EA8ED900153C80 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F480329EA8ED900153C80 /* UICollectionView+.swift */; };
@@ -30,8 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1050ACD629F500C700C9F1E4 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		1050ACD629F500C700C9F1E4 /* MemoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryModel.swift; sourceTree = "<group>"; };
 		1050ACD829F5030100C9F1E4 /* HiddenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenButton.swift; sourceTree = "<group>"; };
+		1050ACDD29F547CA00C9F1E4 /* MemoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryListViewModel.swift; sourceTree = "<group>"; };
 		105DE53129ED359D00FE4321 /* ColorFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFilterButton.swift; sourceTree = "<group>"; };
 		109F480129EA899D00153C80 /* BaseVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVIewController.swift; sourceTree = "<group>"; };
 		109F480329EA8ED900153C80 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
@@ -68,9 +70,17 @@
 		1050ACD529F500AB00C9F1E4 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				1050ACD629F500C700C9F1E4 /* HomeViewModel.swift */,
+				1050ACDD29F547CA00C9F1E4 /* MemoryListViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		1050ACDA29F5381B00C9F1E4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1050ACD629F500C700C9F1E4 /* MemoryModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		105DE53029ED358D00FE4321 /* Classes */ = {
@@ -127,9 +137,9 @@
 				10B6544429E6F4C00053523F /* Cells */,
 				10B6544329E6F4530053523F /* Extensions */,
 				10B46F0829DD76E3004273EB /* Views */,
+				1050ACDA29F5381B00C9F1E4 /* Models */,
 				1050ACD529F500AB00C9F1E4 /* ViewModels */,
 				10B46F0B29DD7703004273EB /* Designs */,
-				10B46F0C29DD770C004273EB /* Models */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -165,13 +175,6 @@
 			children = (
 			);
 			path = Designs;
-			sourceTree = "<group>";
-		};
-		10B46F0C29DD770C004273EB /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		10B6544329E6F4530053523F /* Extensions */ = {
@@ -279,11 +282,12 @@
 				109F480229EA899D00153C80 /* BaseVIewController.swift in Sources */,
 				10B6544C29E74CC40053523F /* UIColor+.swift in Sources */,
 				10B6544629E6F4D30053523F /* UIView+.swift in Sources */,
+				1050ACDE29F547CA00C9F1E4 /* MemoryListViewModel.swift in Sources */,
 				109F480429EA8ED900153C80 /* UICollectionView+.swift in Sources */,
 				10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */,
 				10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */,
 				105DE53229ED359D00FE4321 /* ColorFilterButton.swift in Sources */,
-				1050ACD729F500C700C9F1E4 /* HomeViewModel.swift in Sources */,
+				1050ACD729F500C700C9F1E4 /* MemoryModel.swift in Sources */,
 				10B46EF329DD7533004273EB /* SceneDelegate.swift in Sources */,
 				10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */,
 				10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */,
@@ -355,7 +359,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -409,7 +413,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

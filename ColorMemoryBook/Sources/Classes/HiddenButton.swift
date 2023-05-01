@@ -9,10 +9,12 @@ import UIKit
 
 final class HiddenButton: UIButton {
     
+    let titleText : String
+    
     init(title: String){
+        self.titleText = title
         super.init(frame: .zero)
-        self.backgroundColor = UIColor.ohsogo_Charcol
-        self.titleLabel?.text = title
+        setProperties()
         setLayouts()
     }
     
@@ -23,8 +25,17 @@ final class HiddenButton: UIButton {
         }
     }
     
+    private func setProperties(){
+        self.backgroundColor = UIColor.ohsogo_Charcol
+        self.setTitle(titleText, for: .normal)
+        self.titleLabel?.textColor = .white
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        self.isHidden = true
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
+        self.clipsToBounds = true
         self.layer.cornerRadius = 8
     }
     
