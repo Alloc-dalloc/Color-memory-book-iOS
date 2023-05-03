@@ -54,6 +54,7 @@ class HomeViewController: BaseViewController {
     private lazy var floatingButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "floating_blue"), for: .normal)
+        button.setImage(UIImage(named: "floating_black"), for: .selected)
         button.addTarget(self, action: #selector(floatingButtonDidTap), for: .touchUpInside)
         return button
     }()
@@ -123,7 +124,8 @@ class HomeViewController: BaseViewController {
     }
     
     override func bind() {
-        tagSearchTextField.rx.text.orEmpty
+        tagSearchTextField.rx.text
+            .compactMap { $0 }
             .bind(to: viewModel.searchTextSubject)
             .disposed(by: disposeBag)
         
@@ -151,16 +153,8 @@ class HomeViewController: BaseViewController {
     
     @objc private func floatingButtonDidTap(_ sender: UIButton){
         floatingButton.isSelected.toggle()
-        if floatingButton.isSelected{
-            floatingButton.setImage(UIImage(named: "floating_black"), for: .normal)
-            colorFilterButton.isHidden = false
-            memoryRecordButton.isHidden = false
-        }
-        else{
-            floatingButton.setImage(UIImage(named: "floating_blue"), for: .normal)
-            colorFilterButton.isHidden = true
-            memoryRecordButton.isHidden = true
-        }
+        colorFilterButton.isHidden = !sender.isSelected
+        memoryRecordButton.isHidden = !sender.isSelected
     }
     
     @objc private func colorFilterButtonDidTap(){
@@ -170,7 +164,6 @@ class HomeViewController: BaseViewController {
     }
     
     @objc private func clearButtonDidTap(){
-        viewModel.setSearchText("") //질문
         self.tagSearchTextField.text = ""
     }
 }

@@ -15,9 +15,10 @@ class MemoryListViewModel{
     
     lazy var filteredMemoryObservable: Observable<[Memory]> = {
         return Observable.combineLatest(memoryObservable, searchTextSubject.asObservable())
-            .map { memories, searchText in
+            .map { [weak self] memories, searchText in
+                guard let self = self else {return []}
                 return self.searchMemories(searchText: searchText, memories: memories)
-            }
+            }.debug()
     }()
     
     init(){
@@ -28,10 +29,6 @@ class MemoryListViewModel{
             Memory(image: UIImage(named: "tmp4")!, tag: "4번 샘플", color: "초록색 ", description: "4번 dec")
         ]
         memoryObservable.onNext(memories)
-    }
-    
-    func setSearchText(_ text: String) {
-        searchTextSubject.onNext(text)
     }
     
     func searchMemories(searchText: String, memories: [Memory]) -> [Memory] {
