@@ -8,6 +8,8 @@
 
 class HomeViewController: BaseViewController {
     
+    let viewModel = MemoryListViewModel()
+     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.contentMode = .scaleAspectFit
@@ -49,11 +51,16 @@ class HomeViewController: BaseViewController {
         return button
     }()
     
-    private let floatingButton: UIButton = {
+    private lazy var floatingButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "floating_blue"), for: .normal)
+        button.setImage(UIImage(named: "floating_black"), for: .selected)
+        button.addTarget(self, action: #selector(floatingButtonDidTap), for: .touchUpInside)
         return button
     }()
+    
+    private let colorFilterButton = HiddenButton(title: "컬러 필터")
+    private let memoryRecordButton = HiddenButton(title: "메모리 기록")
     
     private(set) lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -65,18 +72,12 @@ class HomeViewController: BaseViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.contentInset = .init(top: .zero, left: .zero, bottom: 60, right: .zero)
         collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView.register(cell: MemoryBookCell.self)
         return collectionView
     }()
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func setLayouts() {
-        self.view.addSubviews(tagSearchTextField, collectionView, floatingButton)
+        self.view.addSubviews(tagSearchTextField, collectionView, floatingButton, colorFilterButton, memoryRecordButton)
         profileButton.snp.makeConstraints { make in
             make.width.equalTo(32)
             make.height.equalTo(32)
@@ -103,8 +104,36 @@ class HomeViewController: BaseViewController {
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-11)
         }
         
+        memoryRecordButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.bottom.equalTo(floatingButton.snp.top).offset(-10)
+        }
+        
+        colorFilterButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.bottom.equalTo(memoryRecordButton.snp.top).offset(-10)
+        }
+    }
+    
+    override func setProperties() {
         setNavigationBar()
         setTagSearchTextField()
+        
+        colorFilterButton.addTarget(self, action: #selector(colorFilterButtonDidTap), for: .touchUpInside)
+        clearButton.addTarget(self, action: #selector(clearButtonDidTap), for: .touchUpInside)
+    }
+    
+    override func bind() {
+        tagSearchTextField.rx.text
+            .compactMap { $0 }
+            .bind(to: viewModel.searchTextSubject)
+            .disposed(by: disposeBag)
+        
+        viewModel.filteredMemoryObservable
+            .bind(to: collectionView.rx.items(cellIdentifier: "MemoryBookCell", cellType: MemoryBookCell.self)) { row, element, cell in
+                cell.configure(with: element.image)
+            }
+            .disposed(by: disposeBag)
     }
     
     func setNavigationBar(){
@@ -120,28 +149,45 @@ class HomeViewController: BaseViewController {
         tagSearchTextField.leftViewMode = .always
         tagSearchTextField.rightView = clearButton
         tagSearchTextField.rightViewMode = .whileEditing
-        //한번 포커싱되면 텍스트 없어도 x버튼 나타남, 다른 걸로 바꿔야
     }
     
+    @objc private func floatingButtonDidTap(_ sender: UIButton){
+        floatingButton.isSelected.toggle()
+        colorFilterButton.isHidden = !sender.isSelected
+        memoryRecordButton.isHidden = !sender.isSelected
+    }
+    
+    @objc private func colorFilterButtonDidTap(){
+        let cameraVC = CameraViewController()
+        cameraVC.modalPresentationStyle = .fullScreen 
+        self.present(cameraVC, animated: true)
+    }
+    
+    @objc private func clearButtonDidTap(){
+        self.tagSearchTextField.text = ""
+    }
 }
 
  
-extension HomeViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 300
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: MemoryBookCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-        return cell
-    }
+extension HomeViewController: UICollectionViewDelegateFlowLayout{
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return viewModel.memories.count
+//    }
+//
+//    private private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell: MemoryBookCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+//
+//        let memory = viewModel.memories[indexPath.row]
+//        cell.configure(with: memory.image)
+//        return cell
+//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width / 2 - 8
         return CGSize(width: width, height: 211)
     }
 }
-
+ 
 #if DEBUG
 import SwiftUI
 
