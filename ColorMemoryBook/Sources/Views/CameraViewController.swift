@@ -249,12 +249,29 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
                 for x in 0 ..< size {
                     let red = Float(x) * increment
 
-                    let isRedRegion = red > 0.5 && green < 0.2 && blue < 0.2
+                    var hue: CGFloat = 0
+                    var saturation: CGFloat = 0
+                    var brightness: CGFloat = 0
+                    var alpha: CGFloat = 0
+                    
+                    UIColor(
+                        red: CGFloat(red),
+                        green: CGFloat(green),
+                        blue: CGFloat(blue),
+                        alpha: 1
+                    ).getHue(
+                        &hue,
+                        saturation: &saturation,
+                        brightness: &brightness,
+                        alpha: &alpha
+                    )
+
+                    let isRedRegion = hue > 0.97 || hue < 0.03 && saturation > 0.2
 
                     cubeData[offset]     = isRedRegion ? 0.0 : red
                     cubeData[offset + 1] = isRedRegion ? 0.0 : green
                     cubeData[offset + 2] = isRedRegion ? 1.0 : blue
-                    cubeData[offset + 3] = isRedRegion ? 0.5 : 1.0
+                    cubeData[offset + 3] = isRedRegion ? 1.0 : 1.0
 
                     offset += 4
                 }
@@ -263,6 +280,7 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
 
         return cubeData
     }
+
 }
 
 extension CameraViewController: AVCapturePhotoCaptureDelegate{
