@@ -12,6 +12,8 @@
 		1050ACD929F5030100C9F1E4 /* HiddenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050ACD829F5030100C9F1E4 /* HiddenButton.swift */; };
 		1050ACDE29F547CA00C9F1E4 /* MemoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050ACDD29F547CA00C9F1E4 /* MemoryListViewModel.swift */; };
 		105DE53229ED359D00FE4321 /* ColorFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105DE53129ED359D00FE4321 /* ColorFilterButton.swift */; };
+		1094F7A72A052CE400EE680D /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1094F7A62A052CE400EE680D /* TagCell.swift */; };
+		1094F7A92A0535DB00EE680D /* MemoryImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1094F7A82A0535DB00EE680D /* MemoryImageCell.swift */; };
 		109F480229EA899D00153C80 /* BaseVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F480129EA899D00153C80 /* BaseVIewController.swift */; };
 		109F480429EA8ED900153C80 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109F480329EA8ED900153C80 /* UICollectionView+.swift */; };
 		10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A838E929E6882D0027AFDA /* HomeViewController.swift */; };
@@ -27,6 +29,7 @@
 		10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544D29E99B6F0053523F /* CameraViewController.swift */; };
 		10CC68A229F0036F006C939C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 10CC68A129F0036F006C939C /* RxCocoa */; };
 		10CC68A429F0036F006C939C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10CC68A329F0036F006C939C /* RxSwift */; };
+		10CCA2C02A03909F0067864D /* MemoryBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCA2BF2A03909F0067864D /* MemoryBookViewController.swift */; };
 		10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358E329E698E2004AEE4B /* MemoryBookCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +38,9 @@
 		1050ACD829F5030100C9F1E4 /* HiddenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenButton.swift; sourceTree = "<group>"; };
 		1050ACDD29F547CA00C9F1E4 /* MemoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryListViewModel.swift; sourceTree = "<group>"; };
 		105DE53129ED359D00FE4321 /* ColorFilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorFilterButton.swift; sourceTree = "<group>"; };
+		1094F7A62A052CE400EE680D /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		1094F7A82A0535DB00EE680D /* MemoryImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryImageCell.swift; sourceTree = "<group>"; };
+		1094F7AA2A0B94CC00EE680D /* ColorMemoryBook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ColorMemoryBook.entitlements; sourceTree = "<group>"; };
 		109F480129EA899D00153C80 /* BaseVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVIewController.swift; sourceTree = "<group>"; };
 		109F480329EA8ED900153C80 /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		10A838E929E6882D0027AFDA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +55,7 @@
 		10B6544929E73C2C0053523F /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		10B6544B29E74CC40053523F /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		10B6544D29E99B6F0053523F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		10CCA2BF2A03909F0067864D /* MemoryBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBookViewController.swift; sourceTree = "<group>"; };
 		10D358E329E698E2004AEE4B /* MemoryBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemoryBookCell.swift; path = ColorMemoryBook/Sources/Cells/MemoryBookCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -111,6 +118,7 @@
 		10B46EEF29DD7533004273EB /* ColorMemoryBook */ = {
 			isa = PBXGroup;
 			children = (
+				1094F7AA2A0B94CC00EE680D /* ColorMemoryBook.entitlements */,
 				10B46F0429DD7684004273EB /* Resources */,
 				10B46F0529DD7699004273EB /* Sources */,
 				10B46EFE29DD7534004273EB /* Info.plist */,
@@ -166,6 +174,7 @@
 				10B6544929E73C2C0053523F /* SignInViewController.swift */,
 				10A838E929E6882D0027AFDA /* HomeViewController.swift */,
 				10B6544D29E99B6F0053523F /* CameraViewController.swift */,
+				10CCA2BF2A03909F0067864D /* MemoryBookViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				10D358E329E698E2004AEE4B /* MemoryBookCell.swift */,
+				1094F7A82A0535DB00EE680D /* MemoryImageCell.swift */,
+				1094F7A62A052CE400EE680D /* TagCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -279,6 +290,7 @@
 			files = (
 				1050ACD929F5030100C9F1E4 /* HiddenButton.swift in Sources */,
 				10B6544829E728D60053523F /* UIViewController+.swift in Sources */,
+				1094F7A92A0535DB00EE680D /* MemoryImageCell.swift in Sources */,
 				109F480229EA899D00153C80 /* BaseVIewController.swift in Sources */,
 				10B6544C29E74CC40053523F /* UIColor+.swift in Sources */,
 				10B6544629E6F4D30053523F /* UIView+.swift in Sources */,
@@ -289,7 +301,9 @@
 				105DE53229ED359D00FE4321 /* ColorFilterButton.swift in Sources */,
 				1050ACD729F500C700C9F1E4 /* MemoryModel.swift in Sources */,
 				10B46EF329DD7533004273EB /* SceneDelegate.swift in Sources */,
+				10CCA2C02A03909F0067864D /* MemoryBookViewController.swift in Sources */,
 				10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */,
+				1094F7A72A052CE400EE680D /* TagCell.swift in Sources */,
 				10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */,
 				10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */,
 			);
@@ -428,6 +442,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ColorMemoryBook/ColorMemoryBook.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6UJYJPDXP4;
@@ -457,6 +472,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ColorMemoryBook/ColorMemoryBook.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6UJYJPDXP4;

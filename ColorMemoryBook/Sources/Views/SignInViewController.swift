@@ -5,6 +5,8 @@
 //  Created by 김윤서 on 2023/04/13.
 //
 
+import AuthenticationServices
+
 
 class SignInViewController : BaseViewController{
     
@@ -24,11 +26,7 @@ class SignInViewController : BaseViewController{
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+
     override init(){
         super.init()
         view.backgroundColor = UIColor.ohsogo_Blue
@@ -51,6 +49,68 @@ class SignInViewController : BaseViewController{
             make.center.equalToSuperview()
         }
     }
+    
+    override func setProperties() {
+        signInButton.addTarget(self, action: #selector(signInButtonDidTap), for: .touchUpInside)
+    }
+    
+    @objc private func signInButtonDidTap(_ sender: UIButton){
+        print("눌림")
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+
+    
+}
+
+
+extension SignInViewController: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate{
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+    
+    // Apple ID 연동 성공 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+            // Apple ID
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            
+            // 계정 정보 가져오기
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+            let idToken = appleIDCredential.identityToken!
+            let authorizationCode = appleIDCredential.authorizationCode
+            let tokeStr = String(data: idToken, encoding: .utf8)
+            let toString = String(decoding: authorizationCode!, as: UTF8.self)
+
+            UserDefaults.standard.setValue(userIdentifier, forKey: "userIdentifier")
+            UserDefaults.standard.setValue(true, forKey: "isAppleLogin")
+            
+            
+            print("User ID : \(userIdentifier)")
+            print("User Email : \(email ?? "")")
+            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
+            print("token : \(String(describing: tokeStr))")
+            print("authorizationCode : " + toString)
+            
+            
+        default:
+            break
+        }
+    }
+    
+    // Apple ID 연동 실패 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle error.
+    }
 }
 
 #if DEBUG
@@ -64,3 +124,5 @@ struct SignInViewController_Previews: PreviewProvider {
 }
 
 #endif
+
+

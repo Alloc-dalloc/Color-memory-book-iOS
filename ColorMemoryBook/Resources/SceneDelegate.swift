@@ -20,9 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         
-//        let signInVC = SignInViewController()
-        let homeVC = HomeViewController()
-        let navigationVC = UINavigationController(rootViewController: homeVC)
+        let signInVC = SignInViewController()
+        let homeVC = MemoryBookViewController()
+        let navigationVC = UINavigationController(rootViewController: signInVC)
         
 //        let cameraVC = CameraViewController()
         window?.makeKeyAndVisible()
