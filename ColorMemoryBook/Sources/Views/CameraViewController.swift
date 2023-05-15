@@ -11,7 +11,7 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
     
     private let captureSession = AVCaptureSession()
     private let photoOutput = AVCapturePhotoOutput()
-    private let previewLayer = AVCaptureVideoPreviewLayer()
+    private let previewLayer = CALayer()
     let videoDataOutput = AVCaptureVideoDataOutput()
 
     private let buttons = [ColorFilterButton(color: .red), ColorFilterButton(color: .green), ColorFilterButton(color: .blue)]
@@ -36,7 +36,7 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
     }
     
     private lazy var colorStackView = UIStackView().then {
-        $0.alignment = .center 
+        $0.alignment = .center
         $0.axis = .horizontal
         $0.distribution = .equalSpacing
         $0.spacing = 40
@@ -171,28 +171,125 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
         } catch let error {
             print("캡쳐 세션을 설정할 수 없습니다. 오류: \(error.localizedDescription)")
         }
-            captureSession.commitConfiguration()
-        }
-    
+        captureSession.commitConfiguration()
+    }
+
     
     private func setupPreview() {
-        previewLayer.session = captureSession
-        previewLayer.videoGravity = .resizeAspectFill
-            previewLayer.connection?.videoOrientation = .portrait
-            previewBackgroundView.layer.addSublayer(previewLayer)
-        
-            DispatchQueue.global(qos: .userInitiated).async {
-                self.captureSession.startRunning()
-                DispatchQueue.main.async {
-                    self.previewLayer.frame = self.previewBackgroundView.bounds
+        previewLayer.contentsGravity = .resizeAspectFill
+        let rotationAngle = CGFloat.pi / 2
+        previewLayer.setAffineTransform(CGAffineTransform(rotationAngle: rotationAngle))
+        previewBackgroundView.layer.addSublayer(previewLayer)
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.captureSession.startRunning()
+            DispatchQueue.main.async {
+                self.previewLayer.frame = self.previewBackgroundView.bounds
             }
         }
     }
+
+    func captureOutput(
+        _ output: AVCaptureOutput,
+        didOutput sampleBuffer: CMSampleBuffer,
+        from connection: AVCaptureConnection
+    ) {
+        guard
+            let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+        else { return }
+
+        let ciImage = CIImage(cvPixelBuffer: imageBuffer)
+        let transformedImage = applyColorTransformation(to: ciImage)
+
+        DispatchQueue.main.async { [weak self] in
+            self?.previewLayer.contents = transformedImage
+        }
+    }
+
+    private func applyColorTransformation(to image: CIImage) -> CGImage? {
+        let ciFilter = CIFilter(name: "CIColorCube")
+        ciFilter?.setValue(image, forKey: kCIInputImageKey)
+
+        let size = 64
+        let cubeData = colorCubeDataForReplacingRedWithBlue(size: size)
+        let dataLength = cubeData.count * MemoryLayout<Float>.size
+        let data = cubeData.withUnsafeBufferPointer { bufferPointer -> NSData? in
+            if let baseAddress = bufferPointer.baseAddress {
+                return NSData(bytes: baseAddress, length: dataLength)
+            }
+            return nil
+        }
+        ciFilter?.setValue(data, forKey: "inputCubeData")
+        ciFilter?.setValue(size, forKey: "inputCubeDimension")
+
+        let outputImage = ciFilter?.outputImage
+        let context = CIContext(options: nil)
+
+        guard
+            let cgImage = context.createCGImage(
+                outputImage!,
+                from: outputImage!.extent
+            )
+        else { return nil }
+
+        return cgImage
+    }
+
+    private func colorCubeDataForReplacingRedWithBlue(size: Int) -> [Float] {
+        let cubeSize = size * size * size
+        var cubeData = [Float](repeating: 0, count: cubeSize * 4)
+        var offset = 0
+
+        let increment = 1.0 / Float(size - 1)
+
+        for z in 0 ..< size {
+            let blue = Float(z) * increment
+            for y in 0 ..< size {
+                let green = Float(y) * increment
+                for x in 0 ..< size {
+                    let red = Float(x) * increment
+
+                    var hue: CGFloat = 0
+                    var saturation: CGFloat = 0
+                    var brightness: CGFloat = 0
+                    var alpha: CGFloat = 0
+                    
+                    UIColor(
+                        red: CGFloat(red),
+                        green: CGFloat(green),
+                        blue: CGFloat(blue),
+                        alpha: 1
+                    ).getHue(
+                        &hue,
+                        saturation: &saturation,
+                        brightness: &brightness,
+                        alpha: &alpha
+                    )
+
+                    let isRedRegion = hue > 0.97 || hue < 0.03 && saturation > 0.2
+
+                    cubeData[offset]     = isRedRegion ? 0.0 : red
+                    cubeData[offset + 1] = isRedRegion ? 0.0 : green
+                    cubeData[offset + 2] = isRedRegion ? 1.0 : blue
+                    cubeData[offset + 3] = isRedRegion ? 1.0 : 1.0
+
+                    offset += 4
+                }
+            }
+        }
+
+        return cubeData
+    }
+
 }
 
 extension CameraViewController: AVCapturePhotoCaptureDelegate{
     
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+    func photoOutput(
+        _ output: AVCapturePhotoOutput,
+        didFinishProcessingPhoto photo: AVCapturePhoto,
+        error: Error?
+    ) {
         guard let imageData = photo.fileDataRepresentation() else {
             print("이미지 데이터를 가져올 수 없습니다.")
             return
