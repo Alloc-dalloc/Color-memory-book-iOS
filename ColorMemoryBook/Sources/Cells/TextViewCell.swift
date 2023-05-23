@@ -22,6 +22,9 @@ class TextViewCell: UICollectionViewCell {
         $0.layer.cornerRadius = 8
     }
     
+    
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLayout()

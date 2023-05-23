@@ -5,11 +5,12 @@
 //  Created by 임영준 on 2023/04/12.
 //
 
+import PhotosUI
 
-class HomeViewController: BaseViewController {
+class HomeViewController: BaseViewController{
     
     let viewModel = MemoryListViewModel()
-     
+    
     private let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.contentMode = .scaleAspectFit
@@ -73,7 +74,7 @@ class HomeViewController: BaseViewController {
         collectionView.contentInset = .init(top: .zero, left: .zero, bottom: 60, right: .zero)
         collectionView.delegate = self
         collectionView.register(cell: MemoryBookCell.self)
-
+        
         return collectionView
     }()
     
@@ -121,6 +122,8 @@ class HomeViewController: BaseViewController {
         setTagSearchTextField()
         colorFilterButton.addTarget(self, action: #selector(colorFilterButtonDidTap), for: .touchUpInside)
         clearButton.addTarget(self, action: #selector(clearButtonDidTap), for: .touchUpInside)
+        memoryRecordButton.addTarget(self, action: #selector(memoryRecordButtonDidTap), for: .touchUpInside)
+        
     }
     
     override func bind() {
@@ -159,16 +162,26 @@ class HomeViewController: BaseViewController {
     
     @objc private func colorFilterButtonDidTap(){
         let cameraVC = CameraViewController()
-        cameraVC.modalPresentationStyle = .fullScreen 
+        cameraVC.modalPresentationStyle = .fullScreen
         self.present(cameraVC, animated: true)
     }
     
     @objc private func clearButtonDidTap(){
         self.tagSearchTextField.text = ""
     }
+    
+    @objc private func memoryRecordButtonDidTap(){
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
+    }
 }
 
- 
+
 extension HomeViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -181,7 +194,36 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout{
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }
- 
+
+extension HomeViewController: PHPickerViewControllerDelegate{
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true) // 1
+        
+        let nextVC = RecordMemoryViewController()
+        
+        
+        let itemProvider = results.first?.itemProvider // 2
+        if let itemProvider = itemProvider,
+           itemProvider.canLoadObject(ofClass: UIImage.self) { // 3
+            itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) { data, error in
+                if let data = data, let image = UIImage(data: data) {
+                    if let indexPath = nextVC.collectionView.indexPathsForVisibleItems.first,
+                       let cell = nextVC.collectionView.cellForItem(at: indexPath) as? MemoryImageCell {
+                        // 이미지 설정
+                        cell.imageView.image = image
+                    }
+                }
+            }
+            navigationController?.pushViewController(nextVC, animated: true)
+            
+        } else {
+            // TODO: Handle empty results or item provider not being able load UIImage
+        }
+    }
+}
+
+
+
 #if DEBUG
 import SwiftUI
 

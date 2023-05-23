@@ -38,9 +38,17 @@ class EditableTagCell: UICollectionViewCell {
         $0.spaceBetweenLines = 20
     }
     
+    func setProperties(){
+        tagsField.onDidSelectTagView = { field, tag in
+            print("삭제 어떻게 하는데")
+        }
+    }
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLayout()
+        setProperties()
     }
     
     func setLayout(){

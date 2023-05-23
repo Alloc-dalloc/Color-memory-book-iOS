@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
 //        let signInVC = SignInViewController()
-        let homeVC = RecordMemoryViewController()
+        let homeVC = HomeViewController()
         let navigationVC = UINavigationController(rootViewController: homeVC)
         
 //        let cameraVC = CameraViewController()
