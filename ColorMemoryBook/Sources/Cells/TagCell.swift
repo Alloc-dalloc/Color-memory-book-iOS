@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 final class TagCell: UICollectionViewCell {
     
-    let backgoundView = UIView().then{
+    let tagBackgroundView = UIView().then{
         $0.backgroundColor = UIColor.ohsogo_Gray
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
@@ -37,14 +39,14 @@ final class TagCell: UICollectionViewCell {
     
 
     func setLayouts(){
-        contentView.addSubview(backgoundView)
-        backgoundView.addSubviews(circleView, tagLabel)
-        backgoundView.snp.makeConstraints {
+        contentView.addSubview(tagBackgroundView)
+        tagBackgroundView.addSubviews(circleView, tagLabel)
+        tagBackgroundView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         circleView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.centerX.equalTo(backgoundView.snp.leading)
+            $0.centerX.equalTo(tagBackgroundView.snp.leading)
             $0.size.equalTo(10)
         }
         tagLabel.snp.makeConstraints {

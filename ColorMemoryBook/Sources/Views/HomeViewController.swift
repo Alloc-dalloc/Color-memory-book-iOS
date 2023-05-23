@@ -62,7 +62,7 @@ class HomeViewController: BaseViewController {
     private let colorFilterButton = HiddenButton(title: "컬러 필터")
     private let memoryRecordButton = HiddenButton(title: "메모리 기록")
     
-    private(set) lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.minimumInteritemSpacing = 12
@@ -73,6 +73,7 @@ class HomeViewController: BaseViewController {
         collectionView.contentInset = .init(top: .zero, left: .zero, bottom: 60, right: .zero)
         collectionView.delegate = self
         collectionView.register(cell: MemoryBookCell.self)
+
         return collectionView
     }()
     
@@ -118,7 +119,6 @@ class HomeViewController: BaseViewController {
     override func setProperties() {
         setNavigationBar()
         setTagSearchTextField()
-        
         colorFilterButton.addTarget(self, action: #selector(colorFilterButtonDidTap), for: .touchUpInside)
         clearButton.addTarget(self, action: #selector(clearButtonDidTap), for: .touchUpInside)
     }
@@ -170,21 +170,15 @@ class HomeViewController: BaseViewController {
 
  
 extension HomeViewController: UICollectionViewDelegateFlowLayout{
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return viewModel.memories.count
-//    }
-//
-//    private private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell: MemoryBookCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-//
-//        let memory = viewModel.memories[indexPath.row]
-//        cell.configure(with: memory.image)
-//        return cell
-//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width / 2 - 8
         return CGSize(width: width, height: 211)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let nextVC = MemoryBookViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
  

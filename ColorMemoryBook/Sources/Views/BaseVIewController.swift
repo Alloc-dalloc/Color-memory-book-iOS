@@ -26,7 +26,6 @@ class BaseViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        hideKeyboard()
         setLayouts()
         setProperties()
         bind()
@@ -38,12 +37,12 @@ class BaseViewController : UIViewController{
 }
 
 extension BaseViewController {
-    func hideKeyboard() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
-            action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
-    }
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
+//    func hideKeyboard() {
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+//            action: #selector(dismissKeyboard))
+//        view.addGestureRecognizer(tap)
+//    }
+//    @objc func dismissKeyboard() {
+//        view.endEditing(true)
+//    }
 }

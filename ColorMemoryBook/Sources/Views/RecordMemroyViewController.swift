@@ -1,21 +1,23 @@
 //
-//  MemoryBookViewController.swift
+//  GenerateMemoryBookViewController.swift
 //  ColorMemoryBook
 //
-//  Created by 임영준 on 2023/05/04.
+//  Created by 임영준 on 2023/05/20.
 //
 
 import UIKit
 
-
-class MemoryBookViewController: BaseViewController {
-        
+class RecordMemoryViewController: BaseViewController {
+    
     private(set) lazy var collectionView: UICollectionView = {
         UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
             $0.showsVerticalScrollIndicator = false
             $0.register(cell: MemoryImageCell.self)
-            $0.register(cell: TagCell.self)
+            $0.register(cell: EditableTagCell.self)
             $0.register(cell: TextViewCell.self)
+//            $0.register(cell: CompleteButtonCell.self)
+//            $0.contentInsetAdjustmentBehavior = .never
+
             $0.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "memoryName")
             $0.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "memoryColor")
             $0.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "memoryMemo")
@@ -25,39 +27,46 @@ class MemoryBookViewController: BaseViewController {
         }
     }()
     
-    private let kebabButton = UIButton().then{
-        $0.setImage(UIImage(named: "kebab_button"), for: .normal)
+    
+    let completeButton = UIButton().then{
+        $0.backgroundColor = .ohsogo_Blue
+        $0.setTitle("완료", for: .normal)
+        
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+
+    }
+    
+    private let dismissButton = UIButton().then{
+        $0.setImage(UIImage(named: "dismiss_button_black"), for: .normal)
         $0.imageView?.contentMode = .scaleAspectFit
     }
     
-    private let memoryImageView = UIImageView().then{
-        $0.image = UIImage(named: "tmp1")
-        $0.contentMode =  .scaleAspectFill
-        $0.clipsToBounds = true
-        $0.backgroundColor = .black
-    }
-    
-    private let memoryTextView = UITextView().then{
-        $0.backgroundColor = UIColor.ohsogo_Gray
+    override func setLayouts() {
+        view.addSubviews(collectionView, completeButton)
+        setNavigationBar()
+        collectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        completeButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(83)
+        }
     }
     
     func setNavigationBar(){
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.topItem?.title = ""
         navigationController?.navigationBar.barTintColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: kebabButton)
-        title = "상세보기"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: dismissButton)
+        title = "메모리 기록"
     }
     
-    
-    override func setLayouts() {
-        setNavigationBar()
-        self.view.addSubview(collectionView)
-        collectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
+    func updateTextViewHeight(for textView: UITextView) {
+        collectionView.performBatchUpdates(nil, completion: nil)
     }
-    
     
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
@@ -73,10 +82,10 @@ class MemoryBookViewController: BaseViewController {
                 return section
                 
             case 1:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(91), heightDimension: .estimated(38))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
@@ -85,15 +94,14 @@ class MemoryBookViewController: BaseViewController {
                 let section = NSCollectionLayoutSection(group: group)
                 section.interGroupSpacing = 10
                 section.boundarySupplementaryItems = [header]
-                section.orthogonalScrollingBehavior = .continuous  // 가로 스크롤
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 18, bottom: 0, trailing: 18)  // 좌우 여백 설정
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 18, bottom: 0, trailing: 18)
                 return section
                 
             case 2:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(91), heightDimension: .estimated(38))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
@@ -102,25 +110,37 @@ class MemoryBookViewController: BaseViewController {
                 let section = NSCollectionLayoutSection(group: group)
                 section.interGroupSpacing = 10
                 section.boundarySupplementaryItems = [header]
-                section.orthogonalScrollingBehavior = .continuous
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 18, bottom: 0, trailing: 18)
                 return section
                 
             case 3:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                
+
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [header]
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 18, bottom: 0, trailing: 18)
-                
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 18, bottom: 100, trailing: 18)
+
                 return section
+                
+                
+//            case 4:
+//                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+//                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+//
+//                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(83))
+//                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+//
+//                let section = NSCollectionLayoutSection(group: group)
+//                section.interGroupSpacing = 100
+//
+//                return section
                 
             default:
                 return nil
@@ -128,11 +148,12 @@ class MemoryBookViewController: BaseViewController {
         }
         return layout
     }
+    
+    
 }
 
-
-extension MemoryBookViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
-    
+extension RecordMemoryViewController : UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+   
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 4
     }
@@ -142,35 +163,15 @@ extension MemoryBookViewController: UICollectionViewDelegateFlowLayout, UICollec
         case 0:
             return 1
         case 1:
-            return 10
+            return 1
         case 2:
-            return 5
+            return 1
         case 3:
             return 1
+//        case 4:
+//            return 1
         default:
             return 1
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let section = indexPath.section
-        switch section {
-        case 0:
-            let cell: MemoryImageCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-            return cell
-        case 1:
-            let cell: TagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-            return cell
-        case 2:
-            let cell: TagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-            return cell
-        case 3:
-            let cell: TextViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-            return cell
-            
-        default:
-            let cell: TagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-            return cell
         }
     }
     
@@ -198,15 +199,57 @@ extension MemoryBookViewController: UICollectionViewDelegateFlowLayout, UICollec
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let section = indexPath.section
+        switch section {
+        case 0:
+            let cell: MemoryImageCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            return cell
+        case 1:
+            let cell: EditableTagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.tagsField.onDidChangeHeightTo = { [weak collectionView] _, _ in
+                collectionView?.performBatchUpdates(nil, completion: nil)
+            }
+            return cell
+        case 2:
+            let cell: EditableTagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.tagsField.onDidChangeHeightTo = { [weak collectionView] _, _ in
+                collectionView?.performBatchUpdates(nil, completion: nil)
+            }
+            return cell
+        case 3:
+            let cell: TextViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.textView.backgroundColor = .white
+            cell.textView.layer.borderWidth = 1
+            cell.textView.delegate = self
+            cell.textView.layer.borderColor = UIColor.ohsogo_Gray?.cgColor
+            cell.textView.isEditable = true
+            return cell
+//        case 4:
+//            let cell: CompleteButtonCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+//            return cell
+            
+        default:
+            let cell: TagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            return cell
+        }
+    }
 }
+
+extension RecordMemoryViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        updateTextViewHeight(for: textView)
+    }
+}
+
 
 
 #if DEBUG
 import SwiftUI
 
-struct MemoryBookViewController_Previews: PreviewProvider {
+struct RecordMemoryViewController_Previews: PreviewProvider {
     static var previews: some View {
-        let viewController = MemoryBookViewController()
+        let viewController = RecordMemoryViewController()
         return viewController.getPreview()
     }
 }

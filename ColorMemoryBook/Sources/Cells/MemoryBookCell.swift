@@ -5,8 +5,9 @@
 //  Created by 임영준 on 2023/04/12.
 //
 
-import Foundation
 import UIKit
+import SnapKit
+import Then
 
 final class MemoryBookCell: UICollectionViewCell{
     

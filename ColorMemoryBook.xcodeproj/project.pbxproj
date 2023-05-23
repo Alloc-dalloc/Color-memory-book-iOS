@@ -31,6 +31,12 @@
 		10CC68A429F0036F006C939C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10CC68A329F0036F006C939C /* RxSwift */; };
 		10CCA2C02A03909F0067864D /* MemoryBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCA2BF2A03909F0067864D /* MemoryBookViewController.swift */; };
 		10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358E329E698E2004AEE4B /* MemoryBookCell.swift */; };
+		10E381302A187F8500DF01F7 /* RecordMemroyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3812F2A187F8500DF01F7 /* RecordMemroyViewController.swift */; };
+		10E381322A18806700DF01F7 /* EditableTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E381312A18806700DF01F7 /* EditableTagCell.swift */; };
+		10E381352A18811F00DF01F7 /* WSTagsField in Frameworks */ = {isa = PBXBuildFile; productRef = 10E381342A18811F00DF01F7 /* WSTagsField */; };
+		10E381402A18960B00DF01F7 /* CompleteButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3813F2A18960B00DF01F7 /* CompleteButtonCell.swift */; };
+		10F913DE2A1209C800FAAAE5 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F913DD2A1209C800FAAAE5 /* TextViewCell.swift */; };
+		10F913E02A122C1F00FAAAE5 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F913DF2A122C1F00FAAAE5 /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +63,11 @@
 		10B6544D29E99B6F0053523F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		10CCA2BF2A03909F0067864D /* MemoryBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBookViewController.swift; sourceTree = "<group>"; };
 		10D358E329E698E2004AEE4B /* MemoryBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemoryBookCell.swift; path = ColorMemoryBook/Sources/Cells/MemoryBookCell.swift; sourceTree = SOURCE_ROOT; };
+		10E3812F2A187F8500DF01F7 /* RecordMemroyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMemroyViewController.swift; sourceTree = "<group>"; };
+		10E381312A18806700DF01F7 /* EditableTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTagCell.swift; sourceTree = "<group>"; };
+		10E3813F2A18960B00DF01F7 /* CompleteButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButtonCell.swift; sourceTree = "<group>"; };
+		10F913DD2A1209C800FAAAE5 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
+		10F913DF2A122C1F00FAAAE5 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +78,7 @@
 				10CC68A429F0036F006C939C /* RxSwift in Frameworks */,
 				10CC68A229F0036F006C939C /* RxCocoa in Frameworks */,
 				10A838ED29E68F290027AFDA /* SnapKit in Frameworks */,
+				10E381352A18811F00DF01F7 /* WSTagsField in Frameworks */,
 				1050ACD329F14A2A00C9F1E4 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +107,7 @@
 			children = (
 				105DE53129ED359D00FE4321 /* ColorFilterButton.swift */,
 				1050ACD829F5030100C9F1E4 /* HiddenButton.swift */,
+				10F913DF2A122C1F00FAAAE5 /* HeaderView.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -147,7 +160,6 @@
 				10B46F0829DD76E3004273EB /* Views */,
 				1050ACDA29F5381B00C9F1E4 /* Models */,
 				1050ACD529F500AB00C9F1E4 /* ViewModels */,
-				10B46F0B29DD7703004273EB /* Designs */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -175,15 +187,9 @@
 				10A838E929E6882D0027AFDA /* HomeViewController.swift */,
 				10B6544D29E99B6F0053523F /* CameraViewController.swift */,
 				10CCA2BF2A03909F0067864D /* MemoryBookViewController.swift */,
+				10E3812F2A187F8500DF01F7 /* RecordMemroyViewController.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		10B46F0B29DD7703004273EB /* Designs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Designs;
 			sourceTree = "<group>";
 		};
 		10B6544329E6F4530053523F /* Extensions */ = {
@@ -203,6 +209,9 @@
 				10D358E329E698E2004AEE4B /* MemoryBookCell.swift */,
 				1094F7A82A0535DB00EE680D /* MemoryImageCell.swift */,
 				1094F7A62A052CE400EE680D /* TagCell.swift */,
+				10E381312A18806700DF01F7 /* EditableTagCell.swift */,
+				10F913DD2A1209C800FAAAE5 /* TextViewCell.swift */,
+				10E3813F2A18960B00DF01F7 /* CompleteButtonCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -228,6 +237,7 @@
 				10CC68A129F0036F006C939C /* RxCocoa */,
 				10CC68A329F0036F006C939C /* RxSwift */,
 				1050ACD229F14A2A00C9F1E4 /* Then */,
+				10E381342A18811F00DF01F7 /* WSTagsField */,
 			);
 			productName = ColorMemoryBook;
 			productReference = 10B46EED29DD7533004273EB /* ColorMemoryBook.app */;
@@ -261,6 +271,7 @@
 				10A838EB29E68F290027AFDA /* XCRemoteSwiftPackageReference "SnapKit" */,
 				10CC68A029F0036F006C939C /* XCRemoteSwiftPackageReference "RxSwift" */,
 				1050ACD129F14A2A00C9F1E4 /* XCRemoteSwiftPackageReference "Then" */,
+				10E381332A18811F00DF01F7 /* XCRemoteSwiftPackageReference "WSTagsField" */,
 			);
 			productRefGroup = 10B46EEE29DD7533004273EB /* Products */;
 			projectDirPath = "";
@@ -291,17 +302,22 @@
 				1050ACD929F5030100C9F1E4 /* HiddenButton.swift in Sources */,
 				10B6544829E728D60053523F /* UIViewController+.swift in Sources */,
 				1094F7A92A0535DB00EE680D /* MemoryImageCell.swift in Sources */,
+				10E381402A18960B00DF01F7 /* CompleteButtonCell.swift in Sources */,
 				109F480229EA899D00153C80 /* BaseVIewController.swift in Sources */,
 				10B6544C29E74CC40053523F /* UIColor+.swift in Sources */,
 				10B6544629E6F4D30053523F /* UIView+.swift in Sources */,
 				1050ACDE29F547CA00C9F1E4 /* MemoryListViewModel.swift in Sources */,
 				109F480429EA8ED900153C80 /* UICollectionView+.swift in Sources */,
+				10E381322A18806700DF01F7 /* EditableTagCell.swift in Sources */,
 				10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */,
+				10F913DE2A1209C800FAAAE5 /* TextViewCell.swift in Sources */,
 				10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */,
 				105DE53229ED359D00FE4321 /* ColorFilterButton.swift in Sources */,
 				1050ACD729F500C700C9F1E4 /* MemoryModel.swift in Sources */,
 				10B46EF329DD7533004273EB /* SceneDelegate.swift in Sources */,
 				10CCA2C02A03909F0067864D /* MemoryBookViewController.swift in Sources */,
+				10F913E02A122C1F00FAAAE5 /* HeaderView.swift in Sources */,
+				10E381302A187F8500DF01F7 /* RecordMemroyViewController.swift in Sources */,
 				10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */,
 				1094F7A72A052CE400EE680D /* TagCell.swift in Sources */,
 				10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */,
@@ -545,6 +561,14 @@
 				kind = branch;
 			};
 		};
+		10E381332A18811F00DF01F7 /* XCRemoteSwiftPackageReference "WSTagsField" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/whitesmith/WSTagsField";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -567,6 +591,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 10CC68A029F0036F006C939C /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		10E381342A18811F00DF01F7 /* WSTagsField */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10E381332A18811F00DF01F7 /* XCRemoteSwiftPackageReference "WSTagsField" */;
+			productName = WSTagsField;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
