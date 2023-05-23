@@ -34,8 +34,7 @@ class RecordMemoryViewController: BaseViewController {
         
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         $0.setTitleColor(UIColor.white, for: .normal)
-        $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-
+ 
     }
     
     private let dismissButton = UIButton().then{
@@ -52,8 +51,26 @@ class RecordMemoryViewController: BaseViewController {
         completeButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
-            $0.height.equalTo(83)
+            $0.height.equalTo(60)
         }
+    }
+    
+    override func setProperties() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow(notification: )),
+            name: UIResponder.keyboardWillShowNotification, object: nil
+        )
+        dismissButton.addTarget(self, action: #selector(dismissButtonDidTap), for: .touchUpInside)
+
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
     }
     
     func setNavigationBar(){
@@ -66,6 +83,19 @@ class RecordMemoryViewController: BaseViewController {
     
     func updateTextViewHeight(for textView: UITextView) {
         collectionView.performBatchUpdates(nil, completion: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let intersection = view.frame.intersection(keyboardSize)
+            if intersection.height > 0 {
+                view.frame.origin.y -= intersection.height
+            }
+        }
+    }
+    
+    @objc private func dismissButtonDidTap(){
+        navigationController?.popViewController(animated: true)
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -129,19 +159,6 @@ class RecordMemoryViewController: BaseViewController {
 
                 return section
                 
-                
-//            case 4:
-//                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-//                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-//
-//                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(83))
-//                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-//
-//                let section = NSCollectionLayoutSection(group: group)
-//                section.interGroupSpacing = 100
-//
-//                return section
-                
             default:
                 return nil
             }
@@ -168,8 +185,7 @@ extension RecordMemoryViewController : UICollectionViewDelegateFlowLayout, UICol
             return 1
         case 3:
             return 1
-//        case 4:
-//            return 1
+
         default:
             return 1
         }
@@ -225,9 +241,6 @@ extension RecordMemoryViewController : UICollectionViewDelegateFlowLayout, UICol
             cell.textView.layer.borderColor = UIColor.ohsogo_Gray?.cgColor
             cell.textView.isEditable = true
             return cell
-//        case 4:
-//            let cell: CompleteButtonCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-//            return cell
             
         default:
             let cell: TagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)

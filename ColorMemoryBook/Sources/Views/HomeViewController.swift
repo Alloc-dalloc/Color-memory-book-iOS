@@ -207,10 +207,10 @@ extension HomeViewController: PHPickerViewControllerDelegate{
            itemProvider.canLoadObject(ofClass: UIImage.self) { // 3
             itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) { data, error in
                 if let data = data, let image = UIImage(data: data) {
-                    if let indexPath = nextVC.collectionView.indexPathsForVisibleItems.first,
-                       let cell = nextVC.collectionView.cellForItem(at: indexPath) as? MemoryImageCell {
-                        // 이미지 설정
-                        cell.imageView.image = image
+                    DispatchQueue.main.async {
+                        if let indexPath = nextVC.collectionView.indexPathsForVisibleItems.first,
+                           let cell = nextVC.collectionView.cellForItem(at: indexPath) as? MemoryImageCell {
+                            cell.imageView.image = image                                    }
                     }
                 }
             }
