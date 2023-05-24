@@ -6,6 +6,7 @@
 //
 
 import PhotosUI
+import BackgroundRemoval
 
 class HomeViewController: BaseViewController{
     
@@ -206,7 +207,8 @@ extension HomeViewController: PHPickerViewControllerDelegate{
             itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) {[weak self] data, error in
                 if let data = data, let image = UIImage(data: data) {
                     DispatchQueue.main.async {
-                        let nextVC = RecordMemoryViewController(image: image)
+                        let removeBackgroundImage = BackgroundRemoval().removeBackground(image: image, maskOnly: false)
+                        let nextVC = RecordMemoryViewController(image: removeBackgroundImage)
                         self?.navigationController?.pushViewController(nextVC, animated: true)
                         }
                     }
