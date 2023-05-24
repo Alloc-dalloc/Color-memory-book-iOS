@@ -8,7 +8,7 @@
 import UIKit
 import WSTagsField
 
-class EditableTagCell: UICollectionViewCell {
+final class EditableTagCell: UICollectionViewCell {
     
     let tagBackgoundView = UIView().then{
         $0.backgroundColor = UIColor.ohsogo_Gray

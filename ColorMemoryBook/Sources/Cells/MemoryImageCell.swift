@@ -9,10 +9,10 @@ import UIKit
 import SnapKit
 import Then
 
-class MemoryImageCell: UICollectionViewCell {
+final class MemoryImageCell: UICollectionViewCell {
     let imageView = UIImageView().then{
         $0.backgroundColor = .ohsogo_Gray
-        $0.contentMode = .scaleAspectFill
+        $0.contentMode = .scaleAspectFit
     }
     
     override init(frame: CGRect) {

@@ -197,25 +197,20 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout{
 
 extension HomeViewController: PHPickerViewControllerDelegate{
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true) // 1
+        picker.dismiss(animated: true)
         
-        let nextVC = RecordMemoryViewController()
-        
-        
-        let itemProvider = results.first?.itemProvider // 2
+
+        let itemProvider = results.first?.itemProvider
         if let itemProvider = itemProvider,
-           itemProvider.canLoadObject(ofClass: UIImage.self) { // 3
-            itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) { data, error in
+           itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) {[weak self] data, error in
                 if let data = data, let image = UIImage(data: data) {
                     DispatchQueue.main.async {
-                        if let indexPath = nextVC.collectionView.indexPathsForVisibleItems.first,
-                           let cell = nextVC.collectionView.cellForItem(at: indexPath) as? MemoryImageCell {
-                            cell.imageView.image = image                                    }
+                        let nextVC = RecordMemoryViewController(image: image)
+                        self?.navigationController?.pushViewController(nextVC, animated: true)
+                        }
                     }
-                }
             }
-            navigationController?.pushViewController(nextVC, animated: true)
-            
         } else {
             // TODO: Handle empty results or item provider not being able load UIImage
         }

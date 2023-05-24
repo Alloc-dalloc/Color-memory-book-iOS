@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompleteButtonCell: UICollectionViewCell {
+final class CompleteButtonCell: UICollectionViewCell {
    
     let completeButton = UIButton().then{
         $0.backgroundColor = .ohsogo_Blue

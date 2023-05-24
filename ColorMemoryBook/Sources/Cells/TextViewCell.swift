@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-class TextViewCell: UICollectionViewCell {
+final class TextViewCell: UICollectionViewCell {
     let textView = UITextView().then{
         $0.textContainer.maximumNumberOfLines = 0
         $0.backgroundColor = UIColor.ohsogo_Gray

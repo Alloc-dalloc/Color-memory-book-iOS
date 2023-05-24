@@ -9,13 +9,14 @@ import UIKit
 
 class RecordMemoryViewController: BaseViewController {
     
+    var selectedImage = UIImage()
+    
     private(set) lazy var collectionView: UICollectionView = {
         UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
             $0.showsVerticalScrollIndicator = false
             $0.register(cell: MemoryImageCell.self)
             $0.register(cell: EditableTagCell.self)
             $0.register(cell: TextViewCell.self)
-//            $0.register(cell: CompleteButtonCell.self)
 //            $0.contentInsetAdjustmentBehavior = .never
 
             $0.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "memoryName")
@@ -65,6 +66,15 @@ class RecordMemoryViewController: BaseViewController {
 
     }
     
+    init(image: UIImage) {
+        super.init()
+        self.selectedImage = image
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         NotificationCenter.default.removeObserver(
             self,
@@ -85,6 +95,12 @@ class RecordMemoryViewController: BaseViewController {
         collectionView.performBatchUpdates(nil, completion: nil)
     }
     
+    func calculateImageHeight() -> CGFloat {
+        let aspectRatio = selectedImage.size.width / selectedImage.size.height
+        let height = collectionView.frame.width / aspectRatio
+        return height
+    }
+    
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let intersection = view.frame.intersection(keyboardSize)
@@ -102,10 +118,10 @@ class RecordMemoryViewController: BaseViewController {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             switch sectionIndex{
             case 0:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(self.calculateImageHeight()))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(self.collectionView.frame.height * 470 / 690))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(self.calculateImageHeight()))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
                 let section = NSCollectionLayoutSection(group: group)
@@ -220,6 +236,8 @@ extension RecordMemoryViewController : UICollectionViewDelegateFlowLayout, UICol
         switch section {
         case 0:
             let cell: MemoryImageCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.imageView.image = selectedImage
+            collectionView.performBatchUpdates(nil, completion: nil)
             return cell
         case 1:
             let cell: EditableTagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
@@ -257,14 +275,14 @@ extension RecordMemoryViewController: UITextViewDelegate {
 
 
 
-#if DEBUG
-import SwiftUI
-
-struct RecordMemoryViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewController = RecordMemoryViewController()
-        return viewController.getPreview()
-    }
-}
-
-#endif
+//#if DEBUG
+//import SwiftUI
+//
+//struct RecordMemoryViewController_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let viewController = RecordMemoryViewController(image: <#UIImage#>)
+//        return viewController.getPreview()
+//    }
+//}
+//
+//#endif
