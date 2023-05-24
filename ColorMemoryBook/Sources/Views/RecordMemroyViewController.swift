@@ -9,7 +9,7 @@ import UIKit
 
 class RecordMemoryViewController: BaseViewController {
     
-    var selectedImage = UIImage()
+    private var selectedImage = UIImage()
     
     private(set) lazy var collectionView: UICollectionView = {
         UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
@@ -17,8 +17,6 @@ class RecordMemoryViewController: BaseViewController {
             $0.register(cell: MemoryImageCell.self)
             $0.register(cell: EditableTagCell.self)
             $0.register(cell: TextViewCell.self)
-//            $0.contentInsetAdjustmentBehavior = .never
-
             $0.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "memoryName")
             $0.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "memoryColor")
             $0.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "memoryMemo")
@@ -29,7 +27,7 @@ class RecordMemoryViewController: BaseViewController {
     }()
     
     
-    let completeButton = UIButton().then{
+    private let completeButton = UIButton().then{
         $0.backgroundColor = .ohsogo_Blue
         $0.setTitle("완료", for: .normal)
         
@@ -69,7 +67,6 @@ class RecordMemoryViewController: BaseViewController {
             object: nil
         )
         dismissButton.addTarget(self, action: #selector(dismissButtonDidTap), for: .touchUpInside)
-
     }
     
     init(image: UIImage) {
@@ -101,6 +98,7 @@ class RecordMemoryViewController: BaseViewController {
         collectionView.performBatchUpdates(nil, completion: nil)
     }
     
+    //이미지 높이에 따라 레이아웃 다르게 줄려고 했는데 누끼따서 넣으니까 다 정사각형이네 아옼
     func calculateImageHeight() -> CGFloat {
         let aspectRatio = selectedImage.size.width / selectedImage.size.height
         let height = collectionView.frame.width / aspectRatio
