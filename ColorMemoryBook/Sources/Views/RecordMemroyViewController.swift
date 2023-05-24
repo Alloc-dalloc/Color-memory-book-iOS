@@ -62,6 +62,12 @@ class RecordMemoryViewController: BaseViewController {
             selector: #selector(keyboardWillShow(notification: )),
             name: UIResponder.keyboardWillShowNotification, object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide(notification:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
         dismissButton.addTarget(self, action: #selector(dismissButtonDidTap), for: .touchUpInside)
 
     }
@@ -107,6 +113,12 @@ class RecordMemoryViewController: BaseViewController {
             if intersection.height > 0 {
                 view.frame.origin.y -= intersection.height
             }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        UIView.animate(withDuration: 0.3) {
+            self.view.frame.origin.y = 0
         }
     }
     

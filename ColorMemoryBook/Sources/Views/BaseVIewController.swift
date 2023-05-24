@@ -29,6 +29,7 @@ class BaseViewController : UIViewController{
         setLayouts()
         setProperties()
         bind()
+        hideKeyboardWhenTappedAround()
     }
     
     func setLayouts(){}
