@@ -22,9 +22,6 @@ final class TextViewCell: UICollectionViewCell {
         $0.layer.cornerRadius = 8
     }
     
-    
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLayout()
@@ -40,6 +37,15 @@ final class TextViewCell: UICollectionViewCell {
             $0.edges.equalToSuperview()
         }
     }
+    
+    func calculateCellHeight() -> CGFloat {
+        let contentWidth = textView.bounds.width - textView.textContainerInset.left - textView.textContainerInset.right
+        let size = CGSize(width: contentWidth, height: .greatestFiniteMagnitude)
+        let boundingRect = textView.text.boundingRect(with: size, options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: [.font: textView.font as Any], context: nil)
+        let cellHeight = ceil(boundingRect.height) + textView.textContainerInset.top + textView.textContainerInset.bottom
+        return cellHeight
+    }
+    
 }
 
 #if DEBUG

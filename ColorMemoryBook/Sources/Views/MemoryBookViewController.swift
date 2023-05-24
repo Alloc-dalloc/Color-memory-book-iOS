@@ -58,7 +58,6 @@ class MemoryBookViewController: BaseViewController {
         }
     }
     
-    
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             switch sectionIndex{
@@ -197,8 +196,9 @@ extension MemoryBookViewController: UICollectionViewDelegateFlowLayout, UICollec
             return headerView
         }
     }
-    
 }
+
+
 
 
 #if DEBUG

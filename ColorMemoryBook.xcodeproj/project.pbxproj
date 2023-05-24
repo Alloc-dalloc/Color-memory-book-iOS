@@ -29,6 +29,7 @@
 		10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544D29E99B6F0053523F /* CameraViewController.swift */; };
 		10CC68A229F0036F006C939C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 10CC68A129F0036F006C939C /* RxCocoa */; };
 		10CC68A429F0036F006C939C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10CC68A329F0036F006C939C /* RxSwift */; };
+		10CC93642A1E602C002587B1 /* BackgroundRemoval in Frameworks */ = {isa = PBXBuildFile; productRef = 10CC93632A1E602C002587B1 /* BackgroundRemoval */; };
 		10CCA2C02A03909F0067864D /* MemoryBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CCA2BF2A03909F0067864D /* MemoryBookViewController.swift */; };
 		10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D358E329E698E2004AEE4B /* MemoryBookCell.swift */; };
 		10E381302A187F8500DF01F7 /* RecordMemroyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3812F2A187F8500DF01F7 /* RecordMemroyViewController.swift */; };
@@ -80,6 +81,7 @@
 				10A838ED29E68F290027AFDA /* SnapKit in Frameworks */,
 				10E381352A18811F00DF01F7 /* WSTagsField in Frameworks */,
 				1050ACD329F14A2A00C9F1E4 /* Then in Frameworks */,
+				10CC93642A1E602C002587B1 /* BackgroundRemoval in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +240,7 @@
 				10CC68A329F0036F006C939C /* RxSwift */,
 				1050ACD229F14A2A00C9F1E4 /* Then */,
 				10E381342A18811F00DF01F7 /* WSTagsField */,
+				10CC93632A1E602C002587B1 /* BackgroundRemoval */,
 			);
 			productName = ColorMemoryBook;
 			productReference = 10B46EED29DD7533004273EB /* ColorMemoryBook.app */;
@@ -272,6 +275,7 @@
 				10CC68A029F0036F006C939C /* XCRemoteSwiftPackageReference "RxSwift" */,
 				1050ACD129F14A2A00C9F1E4 /* XCRemoteSwiftPackageReference "Then" */,
 				10E381332A18811F00DF01F7 /* XCRemoteSwiftPackageReference "WSTagsField" */,
+				10CC93622A1E602C002587B1 /* XCRemoteSwiftPackageReference "BackgroundRemoval" */,
 			);
 			productRefGroup = 10B46EEE29DD7533004273EB /* Products */;
 			projectDirPath = "";
@@ -561,6 +565,14 @@
 				kind = branch;
 			};
 		};
+		10CC93622A1E602C002587B1 /* XCRemoteSwiftPackageReference "BackgroundRemoval" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Ezaldeen99/BackgroundRemoval.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		10E381332A18811F00DF01F7 /* XCRemoteSwiftPackageReference "WSTagsField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/whitesmith/WSTagsField";
@@ -591,6 +603,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 10CC68A029F0036F006C939C /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		10CC93632A1E602C002587B1 /* BackgroundRemoval */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10CC93622A1E602C002587B1 /* XCRemoteSwiftPackageReference "BackgroundRemoval" */;
+			productName = BackgroundRemoval;
 		};
 		10E381342A18811F00DF01F7 /* WSTagsField */ = {
 			isa = XCSwiftPackageProductDependency;
