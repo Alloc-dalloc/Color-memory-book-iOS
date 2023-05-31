@@ -20,13 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         
         
-//        let signInVC = SignInViewController()
+        let signInVC = SignInViewController()
         let homeVC = HomeViewController()
         let navigationVC = UINavigationController(rootViewController: homeVC)
         
 //        let cameraVC = CameraViewController()
         window?.makeKeyAndVisible()
-        window?.rootViewController = navigationVC
+        window?.rootViewController = signInVC
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

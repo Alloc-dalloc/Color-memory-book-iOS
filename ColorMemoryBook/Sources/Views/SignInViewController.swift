@@ -6,7 +6,7 @@
 //
 
 import AuthenticationServices
-
+import Moya
 
 class SignInViewController : BaseViewController{
     
@@ -50,25 +50,20 @@ class SignInViewController : BaseViewController{
         }
     }
     
-    override func setProperties() {
-        signInButton.addTarget(self, action: #selector(signInButtonDidTap), for: .touchUpInside)
-    }
     
-    @objc private func signInButtonDidTap(_ sender: UIButton){
-        print("눌림")
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
+    override func bind() {
+        signInButton.rx.tap
+            .bind {
+                let appleIDProvider = ASAuthorizationAppleIDProvider()
+                let request = appleIDProvider.createRequest()
+                request.requestedScopes = [.fullName, .email]
+                let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+                authorizationController.delegate = self
+                authorizationController.presentationContextProvider = self
+                authorizationController.performRequests()
+            }.disposed(by: disposeBag)
     }
-
-    
 }
-
 
 extension SignInViewController: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate{
     
@@ -76,34 +71,28 @@ extension SignInViewController: ASAuthorizationControllerPresentationContextProv
         return self.view.window!
     }
     
-    // Apple ID 연동 성공 시
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        switch authorization.credential {
-            // Apple ID
-        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            
-            // 계정 정보 가져오기
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            let idToken = appleIDCredential.identityToken!
-            let authorizationCode = appleIDCredential.authorizationCode
-            let tokeStr = String(data: idToken, encoding: .utf8)
-            let toString = String(decoding: authorizationCode!, as: UTF8.self)
-
-            UserDefaults.standard.setValue(userIdentifier, forKey: "userIdentifier")
-            UserDefaults.standard.setValue(true, forKey: "isAppleLogin")
-            
-            
-            print("User ID : \(userIdentifier)")
-            print("User Email : \(email ?? "")")
-            print("User Name : \((fullName?.givenName ?? "") + (fullName?.familyName ?? ""))")
-            print("token : \(String(describing: tokeStr))")
-            print("authorizationCode : " + toString)
-            
-            
-        default:
-            break
+    func authorizationController(
+        controller _: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
+        guard
+            let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
+            let identityToken = appleIDCredential.identityToken,
+            let token = String(data: identityToken, encoding: .utf8)
+        else {
+            return
+        }
+        let provider = MoyaProvider<AuthService>()
+        provider.request(.login(idToken: token)){ result in
+            switch result {
+            case let .success(response):
+                let result = try? response.map(Token.self)
+                print(result)
+                UserDefaultHandler.shared.accessToken = result?.accessToken ?? "access token is nil"
+                UserDefaultHandler.shared.refreshToken = result?.refreshToken ?? "refresh token is nil"
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
         }
     }
     
