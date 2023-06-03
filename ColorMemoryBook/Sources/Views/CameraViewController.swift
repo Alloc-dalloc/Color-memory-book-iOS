@@ -211,7 +211,7 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
         ciFilter?.setValue(image, forKey: kCIInputImageKey)
 
         let size = 64
-        let cubeData = colorCubeDataForReplacingRedWithBlue(size: size)
+        let cubeData = colorCubeDataForReplacingGreenWithBlue(size: size)
         let dataLength = cubeData.count * MemoryLayout<Float>.size
         let data = cubeData.withUnsafeBufferPointer { bufferPointer -> NSData? in
             if let baseAddress = bufferPointer.baseAddress {
@@ -278,6 +278,51 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
             }
         }
 
+        return cubeData
+    }
+
+    private func colorCubeDataForReplacingGreenWithBlue(size: Int) -> [Float] {
+        let cubeSize = size * size * size
+        var cubeData = [Float](repeating: 0, count: cubeSize * 4)
+        var offset = 0
+
+        let increment = 1.0 / Float(size - 1)
+
+        for z in 0 ..< size {
+            let blue = Float(z) * increment
+            for y in 0 ..< size {
+                let green = Float(y) * increment
+                for x in 0 ..< size {
+                    let red = Float(x) * increment
+
+                    var hue: CGFloat = 0
+                    var saturation: CGFloat = 0
+                    var brightness: CGFloat = 0
+                    var alpha: CGFloat = 0
+
+                    UIColor(
+                        red: CGFloat(red),
+                        green: CGFloat(green),
+                        blue: CGFloat(blue),
+                        alpha: 1
+                    ).getHue(
+                        &hue,
+                        saturation: &saturation,
+                        brightness: &brightness,
+                        alpha: &alpha
+                    )
+
+                    let isGreenRegion = hue > 0.27 && hue < 0.43 && saturation > 0.2
+
+                    cubeData[offset]     = isGreenRegion ? 0.0 : red
+                    cubeData[offset + 1] = isGreenRegion ? 0.0 : green
+                    cubeData[offset + 2] = isGreenRegion ? 1.0 : blue
+                    cubeData[offset + 3] = isGreenRegion ? 1.0 : 1.0
+
+                    offset += 4
+                }
+            }
+        }
         return cubeData
     }
 
