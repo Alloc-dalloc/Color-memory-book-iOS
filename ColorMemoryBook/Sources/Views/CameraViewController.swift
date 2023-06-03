@@ -66,7 +66,8 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
         $0.isHidden = true
     }
     
-    
+    private var selectedTag: Int? = 0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
@@ -75,12 +76,14 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
     }
     
     private func setupColorFilterButtons(){
-        for button in buttons{
+        for (index, button) in buttons.enumerated() {
             button.addTarget(self, action: #selector(colorFilterButtonDidTap), for: .touchUpInside)
             colorStackView.addArrangedSubview(button)
+            button.tag = index
+            button.isSelected = button.tag == 0
         }
     }
-    
+
     override func setLayouts() {
         
         self.view.addSubviews(previewBackgroundView,titleBackgroundView, colorStackView, captureBackgroundView)
@@ -145,6 +148,8 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
                 button.isSelected = (button == sender)
             }
         }
+
+        selectedTag = sender.tag
     }
     
     @objc private func dismissButtonDidTap(){
@@ -194,9 +199,9 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
         didOutput sampleBuffer: CMSampleBuffer,
         from connection: AVCaptureConnection
     ) {
-        guard
-            let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
-        else { return }
+        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            return
+        }
 
         let ciImage = CIImage(cvPixelBuffer: imageBuffer)
         let transformedImage = applyColorTransformation(to: ciImage)
@@ -206,12 +211,25 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
         }
     }
 
+
     private func applyColorTransformation(to image: CIImage) -> CGImage? {
         let ciFilter = CIFilter(name: "CIColorCube")
         ciFilter?.setValue(image, forKey: kCIInputImageKey)
 
         let size = 64
-        let cubeData = colorCubeDataForReplacingGreenWithBlue(size: size)
+        var cubeData: [Float] = []
+        guard let selectedTag = selectedTag else { return nil }
+        switch selectedTag {
+        case 0:
+            cubeData = colorCubeDataForReplacingRedWithBlue(size: size)
+        case 1:
+            cubeData = colorCubeDataForReplacingGreenWithBlue(size: size)
+        case 2:
+            cubeData = colorCubeDataForReplacingBlueWithRed(size: size)
+        default:
+            return nil
+        }
+
         let dataLength = cubeData.count * MemoryLayout<Float>.size
         let data = cubeData.withUnsafeBufferPointer { bufferPointer -> NSData? in
             if let baseAddress = bufferPointer.baseAddress {
@@ -268,9 +286,9 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
 
                     let isRedRegion = hue > 0.97 || hue < 0.03 && saturation > 0.2
 
-                    cubeData[offset]     = isRedRegion ? 0.0 : red
-                    cubeData[offset + 1] = isRedRegion ? 0.0 : green
-                    cubeData[offset + 2] = isRedRegion ? 1.0 : blue
+                    cubeData[offset]     = isRedRegion ? 173 / 255 : red
+                    cubeData[offset + 1] = isRedRegion ? 1.0 : green
+                    cubeData[offset + 2] = isRedRegion ? 47 / 255 : blue
                     cubeData[offset + 3] = isRedRegion ? 1.0 : 1.0
 
                     offset += 4
@@ -312,10 +330,13 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
                         alpha: &alpha
                     )
 
-                    let isGreenRegion = hue > 0.27 && hue < 0.43 && saturation > 0.2
+                    let isGreenRegion = (hue > 0.2 && hue < 0.4 && saturation > 0.2 && brightness > 0.3) ||
+                                       (hue > 0.2 && hue < 0.4 && saturation > 0.2 && brightness <= 0.3) ||
+                                       (hue > 0.27 && hue < 0.37 && saturation > 0.2)
+
 
                     cubeData[offset]     = isGreenRegion ? 0.0 : red
-                    cubeData[offset + 1] = isGreenRegion ? 0.0 : green
+                    cubeData[offset + 1] = isGreenRegion ? 1.0 : green
                     cubeData[offset + 2] = isGreenRegion ? 1.0 : blue
                     cubeData[offset + 3] = isGreenRegion ? 1.0 : 1.0
 
@@ -325,6 +346,52 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
         }
         return cubeData
     }
+
+    private func colorCubeDataForReplacingBlueWithRed(size: Int) -> [Float] {
+        let cubeSize = size * size * size
+        var cubeData = [Float](repeating: 0, count: cubeSize * 4)
+        var offset = 0
+
+        let increment = 1.0 / Float(size - 1)
+
+        for z in 0 ..< size {
+            let blue = Float(z) * increment
+            for y in 0 ..< size {
+                let green = Float(y) * increment
+                for x in 0 ..< size {
+                    let red = Float(x) * increment
+
+                    var hue: CGFloat = 0
+                    var saturation: CGFloat = 0
+                    var brightness: CGFloat = 0
+                    var alpha: CGFloat = 0
+
+                    UIColor(
+                        red: CGFloat(red),
+                        green: CGFloat(green),
+                        blue: CGFloat(blue),
+                        alpha: 1
+                    ).getHue(
+                        &hue,
+                        saturation: &saturation,
+                        brightness: &brightness,
+                        alpha: &alpha
+                    )
+
+                    let isBlueRegion = hue > 0.55 && hue < 0.75 && saturation > 0.2 && brightness > 0.2
+
+                    cubeData[offset]     = isBlueRegion ? 128 / 255 : red
+                    cubeData[offset + 1] = isBlueRegion ? 0.0 : green
+                    cubeData[offset + 2] = isBlueRegion ? 128 / 255 : blue
+                    cubeData[offset + 3] = isBlueRegion ? 1.0 : 1.0
+
+                    offset += 4
+                }
+            }
+        }
+        return cubeData
+    }
+
 
 }
 
