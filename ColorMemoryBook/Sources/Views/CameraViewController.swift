@@ -378,7 +378,7 @@ class CameraViewController: BaseViewController, AVCaptureVideoDataOutputSampleBu
                         alpha: &alpha
                     )
 
-                    let isBlueRegion = hue > 0.55 && hue < 0.75 && saturation > 0.2 && brightness > 0.2
+                    let isBlueRegion = hue > 0.55 && hue < 0.75 && saturation > 0.2 && brightness > 0.2 && brightness < 0.5
 
                     cubeData[offset]     = isBlueRegion ? 128 / 255 : red
                     cubeData[offset + 1] = isBlueRegion ? 0.0 : green
