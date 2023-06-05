@@ -41,6 +41,8 @@ extension SearchService: BaseTargetType {
                 parameters["cursor"] = cursor
             }
 
+            parameters["size"] = 100
+
             return .requestParameters(
                 parameters: parameters,
                 encoding: URLEncoding.default

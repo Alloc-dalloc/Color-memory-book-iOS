@@ -28,7 +28,7 @@ class MemoryListViewModel{
 
         let search = searchTextSubject
             .flatMap { keyword in
-                return searchRepository.fetchList(keyword: keyword, cursor: 2)
+                return searchRepository.fetchList(keyword: keyword, cursor: nil)
             }
 
         list = Observable.merge(viewWillAppear, search)
