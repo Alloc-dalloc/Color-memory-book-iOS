@@ -53,6 +53,12 @@
 		10E381402A18960B00DF01F7 /* CompleteButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E3813F2A18960B00DF01F7 /* CompleteButtonCell.swift */; };
 		10F913DE2A1209C800FAAAE5 /* TextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F913DD2A1209C800FAAAE5 /* TextViewCell.swift */; };
 		10F913E02A122C1F00FAAAE5 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F913DF2A122C1F00FAAAE5 /* HeaderView.swift */; };
+		DD1E814C2A2DD78D00307B61 /* NetworkLogPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E814B2A2DD78D00307B61 /* NetworkLogPlugin.swift */; };
+		DD1E814E2A2DDF1D00307B61 /* DefaultSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E814D2A2DDF1D00307B61 /* DefaultSearchRepository.swift */; };
+		DD1E81502A2DDFAF00307B61 /* MemoryDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E814F2A2DDFAF00307B61 /* MemoryDTO.swift */; };
+		DD1E81592A2DE1D600307B61 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD1E81582A2DE1D600307B61 /* Kingfisher */; };
+		DD1E815B2A2DE1E700307B61 /* UIImage+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E815A2A2DE1E700307B61 /* UIImage+Kingfisher.swift */; };
+		DD1E815D2A2DE37C00307B61 /* ViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E815C2A2DE37C00307B61 /* ViewController+Rx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +102,11 @@
 		10E3813F2A18960B00DF01F7 /* CompleteButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteButtonCell.swift; sourceTree = "<group>"; };
 		10F913DD2A1209C800FAAAE5 /* TextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCell.swift; sourceTree = "<group>"; };
 		10F913DF2A122C1F00FAAAE5 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		DD1E814B2A2DD78D00307B61 /* NetworkLogPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogPlugin.swift; sourceTree = "<group>"; };
+		DD1E814D2A2DDF1D00307B61 /* DefaultSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSearchRepository.swift; sourceTree = "<group>"; };
+		DD1E814F2A2DDFAF00307B61 /* MemoryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDTO.swift; sourceTree = "<group>"; };
+		DD1E815A2A2DE1E700307B61 /* UIImage+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Kingfisher.swift"; sourceTree = "<group>"; };
+		DD1E815C2A2DE37C00307B61 /* ViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Rx.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +118,7 @@
 				10CC68A229F0036F006C939C /* RxCocoa in Frameworks */,
 				10A838ED29E68F290027AFDA /* SnapKit in Frameworks */,
 				10E381352A18811F00DF01F7 /* WSTagsField in Frameworks */,
+				DD1E81592A2DE1D600307B61 /* Kingfisher in Frameworks */,
 				1050ACD329F14A2A00C9F1E4 /* Then in Frameworks */,
 				10CC936D2A20ADD7002587B1 /* ReactiveMoya in Frameworks */,
 				10CC936F2A20ADD7002587B1 /* RxMoya in Frameworks */,
@@ -122,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				1011C69E2A273AB6003BAB0D /* BaseTargetType.swift */,
+				DD1E814B2A2DD78D00307B61 /* NetworkLogPlugin.swift */,
 			);
 			path = Networks;
 			sourceTree = "<group>";
@@ -140,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				1011C6A52A275349003BAB0D /* DefaultAuthRepository.swift */,
+				DD1E814D2A2DDF1D00307B61 /* DefaultSearchRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -148,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				1022A6892A2A1DB100DB101E /* MemoryBookDTO.swift */,
+				DD1E814F2A2DDFAF00307B61 /* MemoryDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -263,6 +278,8 @@
 				10B6544729E728D60053523F /* UIViewController+.swift */,
 				10B6544B29E74CC40053523F /* UIColor+.swift */,
 				109F480329EA8ED900153C80 /* UICollectionView+.swift */,
+				DD1E815A2A2DE1E700307B61 /* UIImage+Kingfisher.swift */,
+				DD1E815C2A2DE37C00307B61 /* ViewController+Rx.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -326,6 +343,7 @@
 				10CC936A2A20ADD7002587B1 /* Moya */,
 				10CC936C2A20ADD7002587B1 /* ReactiveMoya */,
 				10CC936E2A20ADD7002587B1 /* RxMoya */,
+				DD1E81582A2DE1D600307B61 /* Kingfisher */,
 			);
 			productName = ColorMemoryBook;
 			productReference = 10B46EED29DD7533004273EB /* ColorMemoryBook.app */;
@@ -362,6 +380,7 @@
 				10E381332A18811F00DF01F7 /* XCRemoteSwiftPackageReference "WSTagsField" */,
 				10CC93622A1E602C002587B1 /* XCRemoteSwiftPackageReference "BackgroundRemoval" */,
 				10CC93692A20ADD7002587B1 /* XCRemoteSwiftPackageReference "Moya" */,
+				DD1E81572A2DE1D600307B61 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 10B46EEE29DD7533004273EB /* Products */;
 			projectDirPath = "";
@@ -391,10 +410,12 @@
 			files = (
 				1011C6A82A276186003BAB0D /* RootSwitcher.swift in Sources */,
 				1050ACD929F5030100C9F1E4 /* HiddenButton.swift in Sources */,
+				DD1E81502A2DDFAF00307B61 /* MemoryDTO.swift in Sources */,
 				10B6544829E728D60053523F /* UIViewController+.swift in Sources */,
 				1094F7A92A0535DB00EE680D /* MemoryImageCell.swift in Sources */,
 				10E381402A18960B00DF01F7 /* CompleteButtonCell.swift in Sources */,
 				109F480229EA899D00153C80 /* BaseVIewController.swift in Sources */,
+				DD1E815B2A2DE1E700307B61 /* UIImage+Kingfisher.swift in Sources */,
 				10B6544C29E74CC40053523F /* UIColor+.swift in Sources */,
 				10B6544629E6F4D30053523F /* UIView+.swift in Sources */,
 				1050ACDE29F547CA00C9F1E4 /* MemoryListViewModel.swift in Sources */,
@@ -403,6 +424,7 @@
 				10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */,
 				1011C69F2A273AB6003BAB0D /* BaseTargetType.swift in Sources */,
 				10F913DE2A1209C800FAAAE5 /* TextViewCell.swift in Sources */,
+				DD1E814E2A2DDF1D00307B61 /* DefaultSearchRepository.swift in Sources */,
 				10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */,
 				105DE53229ED359D00FE4321 /* ColorFilterButton.swift in Sources */,
 				1050ACD729F500C700C9F1E4 /* MemoryModel.swift in Sources */,
@@ -416,11 +438,13 @@
 				1019CEBE2A2830D100BCE356 /* PostService.swift in Sources */,
 				1019CEC02A29C54900BCE356 /* ImageInfo.swift in Sources */,
 				10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */,
+				DD1E815D2A2DE37C00307B61 /* ViewController+Rx.swift in Sources */,
 				1011C69A2A273935003BAB0D /* UserDefault.swift in Sources */,
 				1022A6902A2B0A5F00DB101E /* MemoryList.swift in Sources */,
 				1094F7A72A052CE400EE680D /* TagCell.swift in Sources */,
 				1022A68A2A2A1DB100DB101E /* MemoryBookDTO.swift in Sources */,
 				1011C6A22A275250003BAB0D /* AuthService.swift in Sources */,
+				DD1E814C2A2DD78D00307B61 /* NetworkLogPlugin.swift in Sources */,
 				1022A6922A2B0AF600DB101E /* SearchService.swift in Sources */,
 				10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */,
 				10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */,
@@ -561,6 +585,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ColorMemoryBook/ColorMemoryBook.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6UJYJPDXP4;
@@ -579,6 +604,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ColorMemoryBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -591,6 +617,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ColorMemoryBook/ColorMemoryBook.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6UJYJPDXP4;
@@ -609,6 +636,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ColorMemoryBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -687,6 +715,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		DD1E81572A2DE1D600307B61 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -734,6 +770,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 10E381332A18811F00DF01F7 /* XCRemoteSwiftPackageReference "WSTagsField" */;
 			productName = WSTagsField;
+		};
+		DD1E81582A2DE1D600307B61 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD1E81572A2DE1D600307B61 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -10,7 +10,7 @@ import BackgroundRemoval
 
 class HomeViewController: BaseViewController{
     
-    let viewModel = MemoryListViewModel()
+    let viewModel = MemoryListViewModel(searchRepository: DefaultSearchRepository())
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
@@ -128,14 +128,24 @@ class HomeViewController: BaseViewController{
     }
     
     override func bind() {
+        rx.viewWillAppear
+            .take(1)
+            .map { _ in }
+            .bind(to: viewModel.viewWillAppear)
+            .disposed(by: disposeBag)
+
         tagSearchTextField.rx.text
+            .orEmpty
             .compactMap { $0 }
+            .distinctUntilChanged()
             .bind(to: viewModel.searchTextSubject)
             .disposed(by: disposeBag)
-        
-        viewModel.filteredMemoryObservable
-            .bind(to: collectionView.rx.items(cellIdentifier: "MemoryBookCell", cellType: MemoryBookCell.self)) { row, element, cell in
-                cell.configure(with: element.image)
+
+        viewModel.list
+            .asObservable()
+            .bind(to: collectionView.rx.items(cellIdentifier: "MemoryBookCell", cellType: MemoryBookCell.self)) { row, memory, cell in
+                cell.tag = memory.id
+                cell.configure(with: memory.imageUrl)
             }
             .disposed(by: disposeBag)
     }

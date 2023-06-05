@@ -83,14 +83,14 @@ extension SignInViewController: ASAuthorizationControllerPresentationContextProv
             return
         }
         print(token)
-        let provider = MoyaProvider<AuthService>()
+        let provider = MoyaProvider<AuthService>(plugins: [NetworkLogPlugin()])
         provider.request(.login(idToken: token)){ result in
             switch result {
             case let .success(response):
                 let result = try? response.map(Token.self)
-                print(result)
-                UserDefaultHandler.shared.accessToken = result?.accessToken ?? "access token is nil"
-                UserDefaultHandler.shared.refreshToken = result?.refreshToken ?? "refresh token is nil"
+                UserDefaultHandler.shared.accessToken = result?.accessToken ?? ""
+                UserDefaultHandler.shared.refreshToken = result?.refreshToken ?? ""
+                RootSwitcher.update(.main)
             case let .failure(error):
                 print(error.localizedDescription)
             }
