@@ -5,11 +5,13 @@
 //  Created by 임영준 on 2023/04/12.
 //
 
+import PhotosUI
+import BackgroundRemoval
 
-class HomeViewController: BaseViewController {
+class HomeViewController: BaseViewController{
     
     let viewModel = MemoryListViewModel()
-     
+    
     private let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.contentMode = .scaleAspectFit
@@ -62,7 +64,7 @@ class HomeViewController: BaseViewController {
     private let colorFilterButton = HiddenButton(title: "컬러 필터")
     private let memoryRecordButton = HiddenButton(title: "메모리 기록")
     
-    private(set) lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 16
         layout.minimumInteritemSpacing = 12
@@ -73,6 +75,7 @@ class HomeViewController: BaseViewController {
         collectionView.contentInset = .init(top: .zero, left: .zero, bottom: 60, right: .zero)
         collectionView.delegate = self
         collectionView.register(cell: MemoryBookCell.self)
+        
         return collectionView
     }()
     
@@ -118,9 +121,10 @@ class HomeViewController: BaseViewController {
     override func setProperties() {
         setNavigationBar()
         setTagSearchTextField()
-        
         colorFilterButton.addTarget(self, action: #selector(colorFilterButtonDidTap), for: .touchUpInside)
         clearButton.addTarget(self, action: #selector(clearButtonDidTap), for: .touchUpInside)
+        memoryRecordButton.addTarget(self, action: #selector(memoryRecordButtonDidTap), for: .touchUpInside)
+        
     }
     
     override func bind() {
@@ -159,35 +163,64 @@ class HomeViewController: BaseViewController {
     
     @objc private func colorFilterButtonDidTap(){
         let cameraVC = CameraViewController()
-        cameraVC.modalPresentationStyle = .fullScreen 
+        cameraVC.modalPresentationStyle = .fullScreen
         self.present(cameraVC, animated: true)
     }
     
     @objc private func clearButtonDidTap(){
         self.tagSearchTextField.text = ""
     }
+    
+    @objc private func memoryRecordButtonDidTap(){
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
+    }
 }
 
- 
+
 extension HomeViewController: UICollectionViewDelegateFlowLayout{
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return viewModel.memories.count
-//    }
-//
-//    private private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell: MemoryBookCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-//
-//        let memory = viewModel.memories[indexPath.row]
-//        cell.configure(with: memory.image)
-//        return cell
-//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width / 2 - 8
         return CGSize(width: width, height: 211)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let nextVC = MemoryBookViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
- 
+
+extension HomeViewController: PHPickerViewControllerDelegate{
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+
+        let itemProvider = results.first?.itemProvider
+        if let itemProvider = itemProvider,
+           itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) {[weak self] data, error in
+                if let data = data, let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        let removeBackgroundImage = BackgroundRemoval().removeBackground(image: image, maskOnly: false)
+                        let nextVC = RecordMemoryViewController(image: removeBackgroundImage)
+                        self?.navigationController?.pushViewController(nextVC, animated: true)
+                        }
+                    }
+            }
+        } else {
+            // TODO: Handle empty results or item provider not being able load UIImage
+        }
+    }
+}
+
+
+
 #if DEBUG
 import SwiftUI
 

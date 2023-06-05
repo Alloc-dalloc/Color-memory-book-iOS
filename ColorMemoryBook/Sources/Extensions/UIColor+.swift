@@ -32,4 +32,7 @@ extension UIColor {
     
     static let ohsogo_Blue = UIColor(hex: "#0182CB")
     static let ohsogo_Charcol = UIColor(hex: "222222")
+    static let ohsogo_Gray = UIColor(hex: "F4F4F5")
+    static let ohsogo_Gray2 = UIColor(hex: "4F4F4F")
+
 }

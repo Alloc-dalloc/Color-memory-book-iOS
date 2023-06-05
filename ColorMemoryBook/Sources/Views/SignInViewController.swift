@@ -5,6 +5,8 @@
 //  Created by 김윤서 on 2023/04/13.
 //
 
+import AuthenticationServices
+import Moya
 
 class SignInViewController : BaseViewController{
     
@@ -24,11 +26,7 @@ class SignInViewController : BaseViewController{
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+
     override init(){
         super.init()
         view.backgroundColor = UIColor.ohsogo_Blue
@@ -51,6 +49,57 @@ class SignInViewController : BaseViewController{
             make.center.equalToSuperview()
         }
     }
+    
+    
+    override func bind() {
+        signInButton.rx.tap
+            .bind {
+                let appleIDProvider = ASAuthorizationAppleIDProvider()
+                let request = appleIDProvider.createRequest()
+                request.requestedScopes = [.fullName, .email]
+                let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+                authorizationController.delegate = self
+                authorizationController.presentationContextProvider = self
+                authorizationController.performRequests()
+            }.disposed(by: disposeBag)
+    }
+}
+
+extension SignInViewController: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate{
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+    
+    func authorizationController(
+        controller _: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
+        guard
+            let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
+            let identityToken = appleIDCredential.identityToken,
+            let token = String(data: identityToken, encoding: .utf8)
+        else {
+            return
+        }
+        let provider = MoyaProvider<AuthService>()
+        provider.request(.login(idToken: token)){ result in
+            switch result {
+            case let .success(response):
+                let result = try? response.map(Token.self)
+                print(result)
+                UserDefaultHandler.shared.accessToken = result?.accessToken ?? "access token is nil"
+                UserDefaultHandler.shared.refreshToken = result?.refreshToken ?? "refresh token is nil"
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    // Apple ID 연동 실패 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle error.
+    }
 }
 
 #if DEBUG
@@ -64,3 +113,5 @@ struct SignInViewController_Previews: PreviewProvider {
 }
 
 #endif
+
+

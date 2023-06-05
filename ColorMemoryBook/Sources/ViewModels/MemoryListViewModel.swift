@@ -18,7 +18,7 @@ class MemoryListViewModel{
             .map { [weak self] memories, searchText in
                 guard let self = self else {return []}
                 return self.searchMemories(searchText: searchText, memories: memories)
-            }.debug()
+            }
     }()
     
     init(){
