@@ -81,6 +81,14 @@ class HomeViewController: BaseViewController{
         
         return collectionView
     }()
+
+    private let listPublisher = PublishSubject<[MemoryDTO]>()
+
+    private var list: [MemoryDTO] = [] {
+        didSet {
+            listPublisher.onNext(list)
+        }
+    }
     
     override func setLayouts() {
         self.view.addSubviews(tagSearchTextField, collectionView, floatingButton, colorFilterButton, memoryRecordButton)
@@ -146,10 +154,24 @@ class HomeViewController: BaseViewController{
 
         viewModel.list
             .asObservable()
+            .subscribe(onNext: { [weak self] list in
+                self?.list = list
+            })
+            .disposed(by: disposeBag)
+
+        listPublisher
             .bind(to: collectionView.rx.items(cellIdentifier: "MemoryBookCell", cellType: MemoryBookCell.self)) { row, memory, cell in
                 cell.tag = memory.id
                 cell.configure(with: memory.imageUrl)
             }
+            .disposed(by: disposeBag)
+
+        collectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self = self else { return }
+                let vc = MemoryBookViewController(postID: self.list[indexPath.item].id)
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
             .disposed(by: disposeBag)
     }
     
@@ -201,11 +223,6 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width / 2 - 8
         return CGSize(width: width, height: 211)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let nextVC = MemoryBookViewController()
-        navigationController?.pushViewController(nextVC, animated: true)
     }
 }
 

@@ -48,14 +48,48 @@ class MemoryBookViewController: BaseViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: kebabButton)
         title = "상세보기"
     }
+
+    private let postID: Int
+    private let viewModel: MemoryBookViewModel
+    private var detail: MemoryDetailDTO?
     
-    
+    init(postID: Int) {
+        self.postID = postID
+        self.viewModel = MemoryBookViewModel(postRepository: DefaultPostRepository())
+        super.init()
+    }
+
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func setLayouts() {
         setNavigationBar()
         self.view.addSubview(collectionView)
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+
+    override func bind() {
+        rx.viewWillAppear
+            .take(1)
+            .map {[weak self] _ -> Int? in
+                return self?.postID
+            }
+            .compactMap { $0 }
+            .bind(to: viewModel.viewWillAppear)
+            .disposed(by: disposeBag)
+
+        viewModel.detail
+            .asObservable()
+            .subscribe(onNext: { [weak self] detail in
+                dump(detail)
+                self?.detail = detail
+                self?.collectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -137,13 +171,14 @@ extension MemoryBookViewController: UICollectionViewDelegateFlowLayout, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let detail = detail else { return 0 }
         switch section {
         case 0:
             return 1
         case 1:
-            return 10
+            return detail.tags.count
         case 2:
-            return 5
+            return detail.tags.count
         case 3:
             return 1
         default:
@@ -152,21 +187,26 @@ extension MemoryBookViewController: UICollectionViewDelegateFlowLayout, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let detail = detail else { return UICollectionViewCell() }
+
         let section = indexPath.section
         switch section {
         case 0:
             let cell: MemoryImageCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.imageView.image(url: detail.imageURL)
             return cell
         case 1:
             let cell: TagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.tagLabel.text = detail.tags[indexPath.item].tagName
             return cell
         case 2:
             let cell: TagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.tagLabel.text = detail.tags[indexPath.item].tagName
             return cell
         case 3:
             let cell: TextViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.textView.text = detail.description
             return cell
-            
         default:
             let cell: TagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
             return cell
@@ -197,18 +237,3 @@ extension MemoryBookViewController: UICollectionViewDelegateFlowLayout, UICollec
         }
     }
 }
-
-
-
-
-#if DEBUG
-import SwiftUI
-
-struct MemoryBookViewController_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewController = MemoryBookViewController()
-        return viewController.getPreview()
-    }
-}
-
-#endif
