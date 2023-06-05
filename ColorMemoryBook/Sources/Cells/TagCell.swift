@@ -36,7 +36,6 @@ final class TagCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
 
     func setLayouts(){
         contentView.addSubview(tagBackgroundView)

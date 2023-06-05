@@ -10,7 +10,7 @@ import UIKit
 
 enum PostService{
     case analysisImage(imageData: Data)
-    case registerMemoryBook(imageUrl: URL)
+    case detail(postID: Int)
 }
 
 extension PostService: BaseTargetType {
@@ -33,8 +33,8 @@ extension PostService: BaseTargetType {
         switch self {
         case .analysisImage:
             return "/api/image/analysis"
-        case .registerMemoryBook:
-            return "/api/color-memory-book/register"
+        case let .detail(postID):
+            return "/api/color-memory-book/detail/\(postID)"
         }
     }
     
@@ -42,8 +42,8 @@ extension PostService: BaseTargetType {
         switch self {
         case .analysisImage:
             return .post
-        case .registerMemoryBook:
-            return .post
+        case .detail:
+            return .get
         }
     }
     
@@ -58,8 +58,8 @@ extension PostService: BaseTargetType {
             )
             return .uploadMultipart([data])
             
-        case let .registerMemoryBook(idToken):
-            return .requestJSONEncodable(idToken)
+        case .detail:
+            return .requestPlain
         }
     }
 }

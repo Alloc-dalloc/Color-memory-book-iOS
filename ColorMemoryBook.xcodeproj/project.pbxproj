@@ -59,6 +59,9 @@
 		DD1E81592A2DE1D600307B61 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD1E81582A2DE1D600307B61 /* Kingfisher */; };
 		DD1E815B2A2DE1E700307B61 /* UIImage+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E815A2A2DE1E700307B61 /* UIImage+Kingfisher.swift */; };
 		DD1E815D2A2DE37C00307B61 /* ViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E815C2A2DE37C00307B61 /* ViewController+Rx.swift */; };
+		DD1E815F2A2DE85F00307B61 /* DefaultPostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E815E2A2DE85F00307B61 /* DefaultPostRepository.swift */; };
+		DD1E81612A2DE8A500307B61 /* MemoryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E81602A2DE8A500307B61 /* MemoryDetailDTO.swift */; };
+		DD1E81632A2DEABE00307B61 /* MemoryBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E81622A2DEABE00307B61 /* MemoryBookViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +110,9 @@
 		DD1E814F2A2DDFAF00307B61 /* MemoryDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDTO.swift; sourceTree = "<group>"; };
 		DD1E815A2A2DE1E700307B61 /* UIImage+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Kingfisher.swift"; sourceTree = "<group>"; };
 		DD1E815C2A2DE37C00307B61 /* ViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Rx.swift"; sourceTree = "<group>"; };
+		DD1E815E2A2DE85F00307B61 /* DefaultPostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPostRepository.swift; sourceTree = "<group>"; };
+		DD1E81602A2DE8A500307B61 /* MemoryDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDetailDTO.swift; sourceTree = "<group>"; };
+		DD1E81622A2DEABE00307B61 /* MemoryBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBookViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +160,7 @@
 			children = (
 				1011C6A52A275349003BAB0D /* DefaultAuthRepository.swift */,
 				DD1E814D2A2DDF1D00307B61 /* DefaultSearchRepository.swift */,
+				DD1E815E2A2DE85F00307B61 /* DefaultPostRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -163,6 +170,7 @@
 			children = (
 				1022A6892A2A1DB100DB101E /* MemoryBookDTO.swift */,
 				DD1E814F2A2DDFAF00307B61 /* MemoryDTO.swift */,
+				DD1E81602A2DE8A500307B61 /* MemoryDetailDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -171,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				1050ACDD29F547CA00C9F1E4 /* MemoryListViewModel.swift */,
+				DD1E81622A2DEABE00307B61 /* MemoryBookViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -420,6 +429,7 @@
 				10B6544629E6F4D30053523F /* UIView+.swift in Sources */,
 				1050ACDE29F547CA00C9F1E4 /* MemoryListViewModel.swift in Sources */,
 				109F480429EA8ED900153C80 /* UICollectionView+.swift in Sources */,
+				DD1E815F2A2DE85F00307B61 /* DefaultPostRepository.swift in Sources */,
 				10E381322A18806700DF01F7 /* EditableTagCell.swift in Sources */,
 				10B46EF129DD7533004273EB /* AppDelegate.swift in Sources */,
 				1011C69F2A273AB6003BAB0D /* BaseTargetType.swift in Sources */,
@@ -434,6 +444,7 @@
 				1011C6A62A275349003BAB0D /* DefaultAuthRepository.swift in Sources */,
 				10CCA2C02A03909F0067864D /* MemoryBookViewController.swift in Sources */,
 				10F913E02A122C1F00FAAAE5 /* HeaderView.swift in Sources */,
+				DD1E81612A2DE8A500307B61 /* MemoryDetailDTO.swift in Sources */,
 				10E381302A187F8500DF01F7 /* RecordMemroyViewController.swift in Sources */,
 				1019CEBE2A2830D100BCE356 /* PostService.swift in Sources */,
 				1019CEC02A29C54900BCE356 /* ImageInfo.swift in Sources */,
@@ -443,6 +454,7 @@
 				1022A6902A2B0A5F00DB101E /* MemoryList.swift in Sources */,
 				1094F7A72A052CE400EE680D /* TagCell.swift in Sources */,
 				1022A68A2A2A1DB100DB101E /* MemoryBookDTO.swift in Sources */,
+				DD1E81632A2DEABE00307B61 /* MemoryBookViewModel.swift in Sources */,
 				1011C6A22A275250003BAB0D /* AuthService.swift in Sources */,
 				DD1E814C2A2DD78D00307B61 /* NetworkLogPlugin.swift in Sources */,
 				1022A6922A2B0AF600DB101E /* SearchService.swift in Sources */,
