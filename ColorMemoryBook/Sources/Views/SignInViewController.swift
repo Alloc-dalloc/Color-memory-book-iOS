@@ -82,6 +82,7 @@ extension SignInViewController: ASAuthorizationControllerPresentationContextProv
         else {
             return
         }
+        print(token)
         let provider = MoyaProvider<AuthService>()
         provider.request(.login(idToken: token)){ result in
             switch result {

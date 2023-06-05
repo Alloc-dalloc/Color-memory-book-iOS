@@ -12,6 +12,12 @@
 		1011C69F2A273AB6003BAB0D /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1011C69E2A273AB6003BAB0D /* BaseTargetType.swift */; };
 		1011C6A22A275250003BAB0D /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1011C6A12A275250003BAB0D /* AuthService.swift */; };
 		1011C6A62A275349003BAB0D /* DefaultAuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1011C6A52A275349003BAB0D /* DefaultAuthRepository.swift */; };
+		1011C6A82A276186003BAB0D /* RootSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1011C6A72A276186003BAB0D /* RootSwitcher.swift */; };
+		1019CEBE2A2830D100BCE356 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1019CEBD2A2830D100BCE356 /* PostService.swift */; };
+		1019CEC02A29C54900BCE356 /* ImageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1019CEBF2A29C54900BCE356 /* ImageInfo.swift */; };
+		1022A68A2A2A1DB100DB101E /* MemoryBookDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022A6892A2A1DB100DB101E /* MemoryBookDTO.swift */; };
+		1022A6902A2B0A5F00DB101E /* MemoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022A68F2A2B0A5F00DB101E /* MemoryList.swift */; };
+		1022A6922A2B0AF600DB101E /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1022A6912A2B0AF600DB101E /* SearchService.swift */; };
 		1050ACD329F14A2A00C9F1E4 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 1050ACD229F14A2A00C9F1E4 /* Then */; };
 		1050ACD729F500C700C9F1E4 /* MemoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050ACD629F500C700C9F1E4 /* MemoryModel.swift */; };
 		1050ACD929F5030100C9F1E4 /* HiddenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1050ACD829F5030100C9F1E4 /* HiddenButton.swift */; };
@@ -55,6 +61,12 @@
 		1011C69E2A273AB6003BAB0D /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		1011C6A12A275250003BAB0D /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1011C6A52A275349003BAB0D /* DefaultAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAuthRepository.swift; sourceTree = "<group>"; };
+		1011C6A72A276186003BAB0D /* RootSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootSwitcher.swift; sourceTree = "<group>"; };
+		1019CEBD2A2830D100BCE356 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		1019CEBF2A29C54900BCE356 /* ImageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfo.swift; sourceTree = "<group>"; };
+		1022A6892A2A1DB100DB101E /* MemoryBookDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBookDTO.swift; sourceTree = "<group>"; };
+		1022A68F2A2B0A5F00DB101E /* MemoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryList.swift; sourceTree = "<group>"; };
+		1022A6912A2B0AF600DB101E /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		1050ACD629F500C700C9F1E4 /* MemoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryModel.swift; sourceTree = "<group>"; };
 		1050ACD829F5030100C9F1E4 /* HiddenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenButton.swift; sourceTree = "<group>"; };
 		1050ACDD29F547CA00C9F1E4 /* MemoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryListViewModel.swift; sourceTree = "<group>"; };
@@ -118,6 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				1011C6A12A275250003BAB0D /* AuthService.swift */,
+				1019CEBD2A2830D100BCE356 /* PostService.swift */,
+				1022A6912A2B0AF600DB101E /* SearchService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -128,6 +142,14 @@
 				1011C6A52A275349003BAB0D /* DefaultAuthRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		1019CEBC2A282F1F00BCE356 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				1022A6892A2A1DB100DB101E /* MemoryBookDTO.swift */,
+			);
+			path = DTOs;
 			sourceTree = "<group>";
 		};
 		1050ACD529F500AB00C9F1E4 /* ViewModels */ = {
@@ -201,6 +223,7 @@
 				1011C6A32A275325003BAB0D /* Repositories */,
 				1011C69B2A273A05003BAB0D /* Networks */,
 				10CC93702A20B406002587B1 /* Utils */,
+				1019CEBC2A282F1F00BCE356 /* DTOs */,
 				10CC93662A209DD4002587B1 /* Entities */,
 				105DE53029ED358D00FE4321 /* Classes */,
 				10B6544429E6F4C00053523F /* Cells */,
@@ -261,6 +284,8 @@
 			isa = PBXGroup;
 			children = (
 				10CC93672A209DEA002587B1 /* Token.swift */,
+				1019CEBF2A29C54900BCE356 /* ImageInfo.swift */,
+				1022A68F2A2B0A5F00DB101E /* MemoryList.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -270,6 +295,7 @@
 			children = (
 				1011C6972A2738DD003BAB0D /* UserDefaultHandler.swift */,
 				1011C6992A273935003BAB0D /* UserDefault.swift */,
+				1011C6A72A276186003BAB0D /* RootSwitcher.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -363,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1011C6A82A276186003BAB0D /* RootSwitcher.swift in Sources */,
 				1050ACD929F5030100C9F1E4 /* HiddenButton.swift in Sources */,
 				10B6544829E728D60053523F /* UIViewController+.swift in Sources */,
 				1094F7A92A0535DB00EE680D /* MemoryImageCell.swift in Sources */,
@@ -386,10 +413,15 @@
 				10CCA2C02A03909F0067864D /* MemoryBookViewController.swift in Sources */,
 				10F913E02A122C1F00FAAAE5 /* HeaderView.swift in Sources */,
 				10E381302A187F8500DF01F7 /* RecordMemroyViewController.swift in Sources */,
+				1019CEBE2A2830D100BCE356 /* PostService.swift in Sources */,
+				1019CEC02A29C54900BCE356 /* ImageInfo.swift in Sources */,
 				10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */,
 				1011C69A2A273935003BAB0D /* UserDefault.swift in Sources */,
+				1022A6902A2B0A5F00DB101E /* MemoryList.swift in Sources */,
 				1094F7A72A052CE400EE680D /* TagCell.swift in Sources */,
+				1022A68A2A2A1DB100DB101E /* MemoryBookDTO.swift in Sources */,
 				1011C6A22A275250003BAB0D /* AuthService.swift in Sources */,
+				1022A6922A2B0AF600DB101E /* SearchService.swift in Sources */,
 				10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */,
 				10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */,
 			);

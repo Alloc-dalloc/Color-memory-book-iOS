@@ -200,7 +200,6 @@ extension HomeViewController: PHPickerViewControllerDelegate{
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
         
-
         let itemProvider = results.first?.itemProvider
         if let itemProvider = itemProvider,
            itemProvider.canLoadObject(ofClass: UIImage.self) {
@@ -208,7 +207,20 @@ extension HomeViewController: PHPickerViewControllerDelegate{
                 if let data = data, let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         let removeBackgroundImage = BackgroundRemoval().removeBackground(image: image, maskOnly: false)
+                        let provider = MoyaProvider<PostService>(plugins: [NetworkLoggerPlugin()])
+                        if let jpgData = image.jpegData(compressionQuality: 0.1) {
+                            provider.request(.analysisImage(imageData: jpgData)) { result in
+                                switch result {
+                                case let .success(response):
+                                    let result = try? response.map(ImageInfo.self)
+                                case let .failure(error):
+                                    print("Request failed with error: \(error.localizedDescription)")
+                                }
+                            }
+                        }
+                        
                         let nextVC = RecordMemoryViewController(image: removeBackgroundImage)
+                        
                         self?.navigationController?.pushViewController(nextVC, animated: true)
                         }
                     }
@@ -223,6 +235,7 @@ extension HomeViewController: PHPickerViewControllerDelegate{
 
 #if DEBUG
 import SwiftUI
+import Moya
 
 struct HomeViewController_Previews: PreviewProvider {
     static var previews: some View {
