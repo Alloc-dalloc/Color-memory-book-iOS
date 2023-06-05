@@ -8,6 +8,9 @@
 import PhotosUI
 import BackgroundRemoval
 
+import RxCocoa
+import RxSwift
+
 class HomeViewController: BaseViewController{
     
     let viewModel = MemoryListViewModel(searchRepository: DefaultSearchRepository())
@@ -135,9 +138,9 @@ class HomeViewController: BaseViewController{
             .disposed(by: disposeBag)
 
         tagSearchTextField.rx.text
-            .orEmpty
             .compactMap { $0 }
             .distinctUntilChanged()
+            .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
             .bind(to: viewModel.searchTextSubject)
             .disposed(by: disposeBag)
 
