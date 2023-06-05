@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
 //        let cameraVC = CameraViewController()
         window?.makeKeyAndVisible()
-        window?.rootViewController = signInVC
+        window?.rootViewController = navigationVC
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
