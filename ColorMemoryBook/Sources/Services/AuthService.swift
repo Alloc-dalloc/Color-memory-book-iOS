@@ -7,7 +7,7 @@
 
 import Moya
 
-enum AuthService{
+enum AuthService {
     case refresh(refreshToken: String, accessToken: String)
     case login(idToken: String)
 }

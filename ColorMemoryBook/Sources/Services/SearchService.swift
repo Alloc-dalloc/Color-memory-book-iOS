@@ -9,57 +9,42 @@ import Moya
 import UIKit
 
 enum SearchService{
-    case analysisImage(imageData: Data)
-    case registerMemoryBook(idToken: String)
+    case search(keyword: String?, cursor: Int?)
 }
 
 extension SearchService: BaseTargetType {
-    var headers: [String: String]? {
-        switch self {
-        case .analysisImage:
-            return [
-                "Content-Type": "application/json",
-                "Authorization": "Bearer \(UserDefaultHandler.shared.accessToken)"
-            ]
-        default:
-            return [
-                "Content-Type": "application/json",
-                "Authorization": "Bearer \(UserDefaultHandler.shared.accessToken)"
-            ]
-        }
-    }
     
     var path: String {
         switch self {
-        case .analysisImage:
-            return "/api/image/analysis"
-        case .registerMemoryBook:
-            return "/api/color-memory-book/register"
+        case .search:
+            return "/api/color-memory-book/search"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .analysisImage:
-            return .get
-        case .registerMemoryBook:
+        case .search:
             return .get
         }
     }
     
     var task: Task {
         switch self {
-        case let .analysisImage(imageData):
-            let data = MultipartFormData(
-                provider: .data(imageData),
-                name: "image",
-                fileName: "image.jpeg",
-                mimeType: "image/jpeg"
+        case let .search(keyword, cursor):
+            var parameters: [String: Any] = [:]
+
+            if let keyword = keyword {
+                parameters["keyword"] = keyword
+            }
+
+            if let cursor = cursor {
+                parameters["cursor"] = cursor
+            }
+
+            return .requestParameters(
+                parameters: parameters,
+                encoding: URLEncoding.default
             )
-            return .uploadMultipart([data])
-            
-        case let .registerMemoryBook(idToken):
-            return .requestJSONEncodable(idToken)
         }
     }
 }

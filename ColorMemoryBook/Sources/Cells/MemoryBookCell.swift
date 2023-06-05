@@ -29,6 +29,11 @@ final class MemoryBookCell: UICollectionViewCell{
             make.edges.equalToSuperview()
         }
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -37,6 +42,10 @@ final class MemoryBookCell: UICollectionViewCell{
     func configure(with image: UIImage) {
         thumbnailImage = image
         thumbnailImageView.image = thumbnailImage
+    }
+
+    func configure(with imageURL: String) {
+        thumbnailImageView.image(url: imageURL)
     }
 }
  
