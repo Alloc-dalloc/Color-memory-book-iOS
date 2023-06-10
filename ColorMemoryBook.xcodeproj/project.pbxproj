@@ -38,6 +38,8 @@
 		10B6544A29E73C2C0053523F /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544929E73C2C0053523F /* SignInViewController.swift */; };
 		10B6544C29E74CC40053523F /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544B29E74CC40053523F /* UIColor+.swift */; };
 		10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B6544D29E99B6F0053523F /* CameraViewController.swift */; };
+		10BF76F02A2DF6210089FD54 /* DefaultAnalysisRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BF76EF2A2DF6210089FD54 /* DefaultAnalysisRepository.swift */; };
+		10BF76F22A2DF8B50089FD54 /* ImageInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BF76F12A2DF8B50089FD54 /* ImageInfoViewModel.swift */; };
 		10CC68A229F0036F006C939C /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 10CC68A129F0036F006C939C /* RxCocoa */; };
 		10CC68A429F0036F006C939C /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 10CC68A329F0036F006C939C /* RxSwift */; };
 		10CC93642A1E602C002587B1 /* BackgroundRemoval in Frameworks */ = {isa = PBXBuildFile; productRef = 10CC93632A1E602C002587B1 /* BackgroundRemoval */; };
@@ -97,6 +99,8 @@
 		10B6544929E73C2C0053523F /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		10B6544B29E74CC40053523F /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		10B6544D29E99B6F0053523F /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		10BF76EF2A2DF6210089FD54 /* DefaultAnalysisRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAnalysisRepository.swift; sourceTree = "<group>"; };
+		10BF76F12A2DF8B50089FD54 /* ImageInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfoViewModel.swift; sourceTree = "<group>"; };
 		10CC93672A209DEA002587B1 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		10CCA2BF2A03909F0067864D /* MemoryBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBookViewController.swift; sourceTree = "<group>"; };
 		10D358E329E698E2004AEE4B /* MemoryBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemoryBookCell.swift; path = ColorMemoryBook/Sources/Cells/MemoryBookCell.swift; sourceTree = SOURCE_ROOT; };
@@ -160,6 +164,7 @@
 			children = (
 				1011C6A52A275349003BAB0D /* DefaultAuthRepository.swift */,
 				DD1E814D2A2DDF1D00307B61 /* DefaultSearchRepository.swift */,
+				10BF76EF2A2DF6210089FD54 /* DefaultAnalysisRepository.swift */,
 				DD1E815E2A2DE85F00307B61 /* DefaultPostRepository.swift */,
 			);
 			path = Repositories;
@@ -180,6 +185,7 @@
 			children = (
 				1050ACDD29F547CA00C9F1E4 /* MemoryListViewModel.swift */,
 				DD1E81622A2DEABE00307B61 /* MemoryBookViewModel.swift */,
+				10BF76F12A2DF8B50089FD54 /* ImageInfoViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -420,6 +426,7 @@
 				1011C6A82A276186003BAB0D /* RootSwitcher.swift in Sources */,
 				1050ACD929F5030100C9F1E4 /* HiddenButton.swift in Sources */,
 				DD1E81502A2DDFAF00307B61 /* MemoryDTO.swift in Sources */,
+				10BF76F02A2DF6210089FD54 /* DefaultAnalysisRepository.swift in Sources */,
 				10B6544829E728D60053523F /* UIViewController+.swift in Sources */,
 				1094F7A92A0535DB00EE680D /* MemoryImageCell.swift in Sources */,
 				10E381402A18960B00DF01F7 /* CompleteButtonCell.swift in Sources */,
@@ -459,6 +466,7 @@
 				DD1E814C2A2DD78D00307B61 /* NetworkLogPlugin.swift in Sources */,
 				1022A6922A2B0AF600DB101E /* SearchService.swift in Sources */,
 				10B6544E29E99B6F0053523F /* CameraViewController.swift in Sources */,
+				10BF76F22A2DF8B50089FD54 /* ImageInfoViewModel.swift in Sources */,
 				10A838EA29E6882D0027AFDA /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
