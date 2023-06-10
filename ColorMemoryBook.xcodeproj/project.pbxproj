@@ -66,6 +66,7 @@
 		DD1E81632A2DEABE00307B61 /* MemoryBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E81622A2DEABE00307B61 /* MemoryBookViewModel.swift */; };
 		DDD1116B2A34C8030054D29E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DDD1116A2A34C8030054D29E /* Lottie */; };
 		DDD1116D2A34C8440054D29E /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = DDD1116C2A34C8440054D29E /* loading.json */; };
+		DDD1116F2A34CD8A0054D29E /* WritingMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1116E2A34CD8A0054D29E /* WritingMemory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		DD1E81602A2DE8A500307B61 /* MemoryDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDetailDTO.swift; sourceTree = "<group>"; };
 		DD1E81622A2DEABE00307B61 /* MemoryBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBookViewModel.swift; sourceTree = "<group>"; };
 		DDD1116C2A34C8440054D29E /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		DDD1116E2A34CD8A0054D29E /* WritingMemory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingMemory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +325,7 @@
 				10CC93672A209DEA002587B1 /* Token.swift */,
 				1019CEBF2A29C54900BCE356 /* ImageInfo.swift */,
 				1022A68F2A2B0A5F00DB101E /* MemoryList.swift */,
+				DDD1116E2A34CD8A0054D29E /* WritingMemory.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				1019CEBE2A2830D100BCE356 /* PostService.swift in Sources */,
 				1019CEC02A29C54900BCE356 /* ImageInfo.swift in Sources */,
 				10D358E429E698E2004AEE4B /* MemoryBookCell.swift in Sources */,
+				DDD1116F2A34CD8A0054D29E /* WritingMemory.swift in Sources */,
 				DD1E815D2A2DE37C00307B61 /* ViewController+Rx.swift in Sources */,
 				1011C69A2A273935003BAB0D /* UserDefault.swift in Sources */,
 				1022A6902A2B0A5F00DB101E /* MemoryList.swift in Sources */,

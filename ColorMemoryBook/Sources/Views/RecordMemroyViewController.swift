@@ -7,6 +7,7 @@
 
 import UIKit
 import Lottie
+import RxSwift
 
 class RecordMemoryViewController: BaseViewController {
     
@@ -75,12 +76,17 @@ class RecordMemoryViewController: BaseViewController {
     private let imageData: Data
     private let viewModel: ImageInfoViewModel
     private var detail: ImageInfo?
+    private var tag: [String] = []
+    private var text: String = ""
     
     init(imageData: Data) {
         let image = UIImage(data: imageData)
         self.imageData = imageData
         self.selectedImage = image!
-        self.viewModel = ImageInfoViewModel(analysisRepository: DefaultAnalysisRepository())
+        self.viewModel = ImageInfoViewModel(
+            analysisRepository: DefaultAnalysisRepository(),
+            postRepository: DefaultPostRepository()
+        )
         super.init()
         setAnimationView()
     }
@@ -124,6 +130,30 @@ class RecordMemoryViewController: BaseViewController {
                 self?.collectionView.isHidden = false
                 self?.completeButton.isEnabled = true
                 self?.collectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
+
+        completeButton.rx.tap
+            .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
+            .map { [weak self] _ -> WritingMemory? in
+                guard
+                    let self = self,
+                    let imageURL = self.detail?.imageURL
+                else { return nil }
+                return WritingMemory(
+                    imageUrl: imageURL,
+                    tagList: self.tag,
+                    description: self.text
+                )
+            }
+            .compactMap { $0 }
+            .bind(to: viewModel.doneButtonDidTap)
+            .disposed(by: disposeBag)
+
+        viewModel.isCompletedUpload
+            .compactMap { $0 }
+            .drive(onNext: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
     }
@@ -304,6 +334,9 @@ extension RecordMemoryViewController : UICollectionViewDelegateFlowLayout, UICol
             cell.tagsField.onDidChangeHeightTo = { [weak collectionView] _, _ in
                 collectionView?.performBatchUpdates(nil, completion: nil)
             }
+            cell.tagsField.placeholderAlwaysVisible = true
+            cell.tagsField.placeholder = "태그 추가"
+            cell.delegate = self
             return cell
         case 2:
             let cell: EditableTagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
@@ -330,8 +363,15 @@ extension RecordMemoryViewController : UICollectionViewDelegateFlowLayout, UICol
     }
 }
 
+extension RecordMemoryViewController: EditableTagCellDelegate {
+    func onDidAddTag(_ tags: [String]) {
+        self.tag = tags
+    }
+}
+
 extension RecordMemoryViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         updateTextViewHeight(for: textView)
+        text = textView.text
     }
 }

@@ -11,6 +11,7 @@ import UIKit
 enum PostService{
     case analysisImage(imageData: Data)
     case detail(postID: Int)
+    case postWritng(_ memory: WritingMemory)
 }
 
 extension PostService: BaseTargetType {
@@ -35,6 +36,8 @@ extension PostService: BaseTargetType {
             return "/api/image/analysis"
         case let .detail(postID):
             return "/api/color-memory-book/detail/\(postID)"
+        case .postWritng(_):
+            return "/api/color-memory-book/register"
         }
     }
     
@@ -44,6 +47,8 @@ extension PostService: BaseTargetType {
             return .post
         case .detail:
             return .get
+        case .postWritng:
+            return .post
         }
     }
     
@@ -60,6 +65,9 @@ extension PostService: BaseTargetType {
             
         case .detail:
             return .requestPlain
+
+        case let .postWritng(memory):
+            return .requestJSONEncodable(memory)
         }
     }
 }

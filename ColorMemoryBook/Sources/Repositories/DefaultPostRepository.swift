@@ -12,6 +12,7 @@ import RxSwift
 
 protocol PostRepository {
     func fetchDetail(postID: Int) -> Observable<MemoryDetailDTO>
+    func saveWriting(_ writingMemory: WritingMemory) -> Observable<MemoryDetail2DTO>
 }
 
 final class DefaultPostRepository: PostRepository {
@@ -29,5 +30,12 @@ final class DefaultPostRepository: PostRepository {
             .asObservable()
             .map(MemoryDetailDTO.self)
     }
+
+    func saveWriting(_ writingMemory: WritingMemory) -> RxSwift.Observable<MemoryDetail2DTO> {
+        return router.rx.request(.postWritng(writingMemory))
+            .asObservable()
+            .map(MemoryDetail2DTO.self)
+    }
+
 
 }
