@@ -64,6 +64,8 @@
 		DD1E815F2A2DE85F00307B61 /* DefaultPostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E815E2A2DE85F00307B61 /* DefaultPostRepository.swift */; };
 		DD1E81612A2DE8A500307B61 /* MemoryDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E81602A2DE8A500307B61 /* MemoryDetailDTO.swift */; };
 		DD1E81632A2DEABE00307B61 /* MemoryBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E81622A2DEABE00307B61 /* MemoryBookViewModel.swift */; };
+		DDD1116B2A34C8030054D29E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DDD1116A2A34C8030054D29E /* Lottie */; };
+		DDD1116D2A34C8440054D29E /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = DDD1116C2A34C8440054D29E /* loading.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +119,7 @@
 		DD1E815E2A2DE85F00307B61 /* DefaultPostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPostRepository.swift; sourceTree = "<group>"; };
 		DD1E81602A2DE8A500307B61 /* MemoryDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryDetailDTO.swift; sourceTree = "<group>"; };
 		DD1E81622A2DEABE00307B61 /* MemoryBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBookViewModel.swift; sourceTree = "<group>"; };
+		DDD1116C2A34C8440054D29E /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,7 @@
 				10E381352A18811F00DF01F7 /* WSTagsField in Frameworks */,
 				DD1E81592A2DE1D600307B61 /* Kingfisher in Frameworks */,
 				1050ACD329F14A2A00C9F1E4 /* Then in Frameworks */,
+				DDD1116B2A34C8030054D29E /* Lottie in Frameworks */,
 				10CC936D2A20ADD7002587B1 /* ReactiveMoya in Frameworks */,
 				10CC936F2A20ADD7002587B1 /* RxMoya in Frameworks */,
 				10CC936B2A20ADD7002587B1 /* Moya in Frameworks */,
@@ -239,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				10B46EF929DD7534004273EB /* Assets.xcassets */,
+				DDD1116C2A34C8440054D29E /* loading.json */,
 				10B46EF229DD7533004273EB /* SceneDelegate.swift */,
 				10B46EF029DD7533004273EB /* AppDelegate.swift */,
 				10B46F0629DD76C6004273EB /* Storyboards */,
@@ -359,6 +364,7 @@
 				10CC936C2A20ADD7002587B1 /* ReactiveMoya */,
 				10CC936E2A20ADD7002587B1 /* RxMoya */,
 				DD1E81582A2DE1D600307B61 /* Kingfisher */,
+				DDD1116A2A34C8030054D29E /* Lottie */,
 			);
 			productName = ColorMemoryBook;
 			productReference = 10B46EED29DD7533004273EB /* ColorMemoryBook.app */;
@@ -396,6 +402,7 @@
 				10CC93622A1E602C002587B1 /* XCRemoteSwiftPackageReference "BackgroundRemoval" */,
 				10CC93692A20ADD7002587B1 /* XCRemoteSwiftPackageReference "Moya" */,
 				DD1E81572A2DE1D600307B61 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				DDD111692A34C8030054D29E /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 10B46EEE29DD7533004273EB /* Products */;
 			projectDirPath = "";
@@ -413,6 +420,7 @@
 			files = (
 				10B46EFD29DD7534004273EB /* LaunchScreen.storyboard in Resources */,
 				10B46EFA29DD7534004273EB /* Assets.xcassets in Resources */,
+				DDD1116D2A34C8440054D29E /* loading.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,6 +751,14 @@
 				kind = branch;
 			};
 		};
+		DDD111692A34C8030054D29E /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -795,6 +811,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD1E81572A2DE1D600307B61 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		DDD1116A2A34C8030054D29E /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDD111692A34C8030054D29E /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

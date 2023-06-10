@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Lottie
 
 class RecordMemoryViewController: BaseViewController {
     
     private var selectedImage = UIImage()
-    
+    private let animationView = LottieAnimationView()
     private(set) lazy var collectionView: UICollectionView = {
         UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
             $0.showsVerticalScrollIndicator = false
@@ -40,7 +41,7 @@ class RecordMemoryViewController: BaseViewController {
     }
     
     override func setLayouts() {
-        view.addSubviews(collectionView, completeButton)
+        view.addSubviews(collectionView, completeButton, animationView)
         setNavigationBar()
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -49,6 +50,10 @@ class RecordMemoryViewController: BaseViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
             $0.height.equalTo(60)
+        }
+        animationView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.size.equalTo(100)
         }
     }
     
@@ -77,6 +82,7 @@ class RecordMemoryViewController: BaseViewController {
         self.selectedImage = image!
         self.viewModel = ImageInfoViewModel(analysisRepository: DefaultAnalysisRepository())
         super.init()
+        setAnimationView()
     }
 
     required init?(coder: NSCoder) {
@@ -92,6 +98,14 @@ class RecordMemoryViewController: BaseViewController {
     }
     
     override func bind() {
+        rx.viewDidLoad
+            .subscribe(onNext: { [weak self] _ in
+                self?.animationView.play()
+                self?.view.isUserInteractionEnabled = false
+                self?.view.alpha = 0.5
+            })
+            .disposed(by: disposeBag)
+
         rx.viewWillAppear
             .take(1)
             .map {[weak self] _ -> Data? in
@@ -105,10 +119,18 @@ class RecordMemoryViewController: BaseViewController {
             .compactMap{$0}
             .drive(onNext: { [weak self] detail in
                 self?.detail = detail
+                self?.animationView.stop()
+                self?.view.isUserInteractionEnabled = true
+                self?.view.alpha = 1
                 self?.collectionView.reloadData()
-
             })
             .disposed(by: disposeBag)
+    }
+
+    private func setAnimationView() {
+        animationView.animation = .named("loading")
+        animationView.loopMode = .loop
+        animationView.contentMode = .scaleAspectFit
     }
     
     func setNavigationBar(){
