@@ -103,15 +103,12 @@ class RecordMemoryViewController: BaseViewController {
         
         viewModel.detail
             .compactMap{$0}
-            .asObservable()
-            .observeOn(MainScheduler.instance)
             .drive(onNext: { [weak self] detail in
-                       dump(detail)
-                       self?.detail = detail
-                       self?.collectionView.reloadData()
+                self?.detail = detail
+                self?.collectionView.reloadData()
 
-                   })
-                   .disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     func setNavigationBar(){
@@ -239,7 +236,6 @@ extension RecordMemoryViewController : UICollectionViewDelegateFlowLayout, UICol
             return 1
         case 3:
             return 1
-
         default:
             return 1
         }
@@ -270,7 +266,6 @@ extension RecordMemoryViewController : UICollectionViewDelegateFlowLayout, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let section = indexPath.section
         switch section {
         case 0:
@@ -280,14 +275,18 @@ extension RecordMemoryViewController : UICollectionViewDelegateFlowLayout, UICol
             return cell
         case 1:
             let cell: EditableTagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.tagsField.addTag(detail?.labels[indexPath.item].name ?? "ㅎㅇ")
+            detail?.labels.forEach { label in
+                cell.tagsField.addTag(label.name)
+            }
             cell.tagsField.onDidChangeHeightTo = { [weak collectionView] _, _ in
                 collectionView?.performBatchUpdates(nil, completion: nil)
             }
             return cell
         case 2:
             let cell: EditableTagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-            cell.tagsField.addTag(detail?.colorAnalysis[indexPath.item].colorName ?? ":")
+            detail?.colorAnalysis.forEach { label in
+                cell.tagsField.addTag(label.colorName)
+            }
             cell.tagsField.onDidChangeHeightTo = { [weak collectionView] _, _ in
                 collectionView?.performBatchUpdates(nil, completion: nil)
             }
@@ -313,17 +312,3 @@ extension RecordMemoryViewController: UITextViewDelegate {
         updateTextViewHeight(for: textView)
     }
 }
-
-
-
-//#if DEBUG
-//import SwiftUI
-//
-//struct RecordMemoryViewController_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let viewController = RecordMemoryViewController(image: <#UIImage#>)
-//        return viewController.getPreview()
-//    }
-//}
-//
-//#endif

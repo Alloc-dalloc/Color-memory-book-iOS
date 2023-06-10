@@ -13,7 +13,6 @@ final class TextViewCell: UICollectionViewCell {
     let textView = UITextView().then{
         $0.textContainer.maximumNumberOfLines = 0
         $0.backgroundColor = UIColor.ohsogo_Gray
-        $0.text = "하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하이하"
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.isEditable = false
         $0.sizeToFit()
