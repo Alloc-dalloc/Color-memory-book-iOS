@@ -15,6 +15,7 @@ class HomeViewController: BaseViewController{
     
     let viewModel = MemoryListViewModel(searchRepository: DefaultSearchRepository())
     
+    
     private let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "logo"))
         imageView.contentMode = .scaleAspectFit
@@ -227,6 +228,8 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension HomeViewController: PHPickerViewControllerDelegate{
+    
+    
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
         
@@ -236,21 +239,20 @@ extension HomeViewController: PHPickerViewControllerDelegate{
             itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) {[weak self] data, error in
                 if let data = data, let image = UIImage(data: data) {
                     DispatchQueue.main.async {
-                        let removeBackgroundImage = BackgroundRemoval().removeBackground(image: image, maskOnly: false)
-                        let provider = MoyaProvider<PostService>(plugins: [NetworkLoggerPlugin()])
-                        if let jpgData = image.jpegData(compressionQuality: 0.1) {
-                            provider.request(.analysisImage(imageData: jpgData)) { result in
-                                switch result {
-                                case let .success(response):
-                                    let result = try? response.map(ImageInfo.self)
-                                case let .failure(error):
-                                    print("Request failed with error: \(error.localizedDescription)")
-                                }
-                            }
-                        }
+//                        let removeBackgroundImage = BackgroundRemoval().removeBackground(image: image, maskOnly: false)
+//                        let provider = MoyaProvider<PostService>(plugins: [NetworkLogPlugin()])
+//                        if let jpgData = image.jpegData(compressionQuality: 0.1) {
+//                            provider.request(.analysisImage(imageData: jpgData)) { result in
+//                                switch result {
+//                                case let .success(response):
+//                                    let result = try? response.map(ImageInfo.self)
+//                                case let .failure(error):
+//                                    print("Request failed with error: \(error.localizedDescription)")
+//                                }
+//                            }
+//                        }
                         
-                        let nextVC = RecordMemoryViewController(image: removeBackgroundImage)
-                        
+                    let nextVC = RecordMemoryViewController(imageData: image.jpegData(compressionQuality: 0.1)!)
                         self?.navigationController?.pushViewController(nextVC, animated: true)
                         }
                     }

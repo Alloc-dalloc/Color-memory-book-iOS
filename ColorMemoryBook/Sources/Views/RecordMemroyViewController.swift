@@ -30,10 +30,8 @@ class RecordMemoryViewController: BaseViewController {
     private let completeButton = UIButton().then{
         $0.backgroundColor = .ohsogo_Blue
         $0.setTitle("완료", for: .normal)
-        
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         $0.setTitleColor(UIColor.white, for: .normal)
- 
     }
     
     private let dismissButton = UIButton().then{
@@ -69,9 +67,16 @@ class RecordMemoryViewController: BaseViewController {
         dismissButton.addTarget(self, action: #selector(dismissButtonDidTap), for: .touchUpInside)
     }
     
-    init(image: UIImage) {
+    private let imageData: Data
+    private let viewModel: ImageInfoViewModel
+    private var detail: ImageInfo?
+    
+    init(imageData: Data) {
+        let image = UIImage(data: imageData)
+        self.imageData = imageData
+        self.selectedImage = image!
+        self.viewModel = ImageInfoViewModel(analysisRepository: DefaultAnalysisRepository())
         super.init()
-        self.selectedImage = image
     }
 
     required init?(coder: NSCoder) {
@@ -84,6 +89,29 @@ class RecordMemoryViewController: BaseViewController {
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
+    }
+    
+    override func bind() {
+        rx.viewWillAppear
+            .take(1)
+            .map {[weak self] _ -> Data? in
+                return self?.imageData
+            }
+            .compactMap { $0 }
+            .bind(to: viewModel.viewWillAppear)
+            .disposed(by: disposeBag)
+        
+        viewModel.detail
+            .compactMap{$0}
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .drive(onNext: { [weak self] detail in
+                       dump(detail)
+                       self?.detail = detail
+                       self?.collectionView.reloadData()
+
+                   })
+                   .disposed(by: disposeBag)
     }
     
     func setNavigationBar(){
@@ -242,6 +270,7 @@ extension RecordMemoryViewController : UICollectionViewDelegateFlowLayout, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         let section = indexPath.section
         switch section {
         case 0:
@@ -251,12 +280,14 @@ extension RecordMemoryViewController : UICollectionViewDelegateFlowLayout, UICol
             return cell
         case 1:
             let cell: EditableTagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.tagsField.addTag(detail?.labels[indexPath.item].name ?? "ㅎㅇ")
             cell.tagsField.onDidChangeHeightTo = { [weak collectionView] _, _ in
                 collectionView?.performBatchUpdates(nil, completion: nil)
             }
             return cell
         case 2:
             let cell: EditableTagCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.tagsField.addTag(detail?.colorAnalysis[indexPath.item].colorName ?? ":")
             cell.tagsField.onDidChangeHeightTo = { [weak collectionView] _, _ in
                 collectionView?.performBatchUpdates(nil, completion: nil)
             }
