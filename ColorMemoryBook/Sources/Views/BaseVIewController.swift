@@ -17,6 +17,7 @@ class BaseViewController : UIViewController{
 
     init(){
         super.init(nibName: nil, bundle: nil)
+        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -28,7 +29,6 @@ class BaseViewController : UIViewController{
         view.backgroundColor = .white
         setLayouts()
         setProperties()
-        bind()
         hideKeyboardWhenTappedAround()
     }
     

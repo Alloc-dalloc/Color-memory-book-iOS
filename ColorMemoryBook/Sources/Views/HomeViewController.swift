@@ -84,6 +84,7 @@ class HomeViewController: BaseViewController{
     }()
 
     private let listPublisher = PublishSubject<[MemoryDTO]>()
+    private let reload = PublishSubject<Void>()
 
     private var list: [MemoryDTO] = [] {
         didSet {
@@ -140,6 +141,12 @@ class HomeViewController: BaseViewController{
     }
     
     override func bind() {
+        reload
+            .debug()
+            .map { _ in }
+            .bind(to: viewModel.viewWillAppear)
+            .disposed(by: disposeBag)
+
         rx.viewWillAppear
             .take(1)
             .map { _ in }
@@ -147,6 +154,7 @@ class HomeViewController: BaseViewController{
             .disposed(by: disposeBag)
 
         tagSearchTextField.rx.text
+            .skip(1)
             .compactMap { $0 }
             .distinctUntilChanged()
             .debounce(.milliseconds(500), scheduler: MainScheduler.instance)
@@ -157,6 +165,7 @@ class HomeViewController: BaseViewController{
             .asObservable()
             .subscribe(onNext: { [weak self] list in
                 self?.list = list
+                self?.collectionView.reloadData()
             })
             .disposed(by: disposeBag)
 
@@ -239,23 +248,12 @@ extension HomeViewController: PHPickerViewControllerDelegate{
             itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) {[weak self] data, error in
                 if let data = data, let image = UIImage(data: data) {
                     DispatchQueue.main.async {
-//                        let removeBackgroundImage = BackgroundRemoval().removeBackground(image: image, maskOnly: false)
-//                        let provider = MoyaProvider<PostService>(plugins: [NetworkLogPlugin()])
-//                        if let jpgData = image.jpegData(compressionQuality: 0.1) {
-//                            provider.request(.analysisImage(imageData: jpgData)) { result in
-//                                switch result {
-//                                case let .success(response):
-//                                    let result = try? response.map(ImageInfo.self)
-//                                case let .failure(error):
-//                                    print("Request failed with error: \(error.localizedDescription)")
-//                                }
-//                            }
-//                        }
-                        
-                    let nextVC = RecordMemoryViewController(imageData: image.jpegData(compressionQuality: 0.1)!)
+                        guard let removeBackgroundImage = BackgroundRemoval().removeBackground(image: image, maskOnly: false).pngData() else { return }
+                        let nextVC = RecordMemoryViewController(imageData: removeBackgroundImage)
+                        nextVC.delegate = self
                         self?.navigationController?.pushViewController(nextVC, animated: true)
-                        }
                     }
+                }
             }
         } else {
             // TODO: Handle empty results or item provider not being able load UIImage
@@ -263,7 +261,11 @@ extension HomeViewController: PHPickerViewControllerDelegate{
     }
 }
 
-
+extension HomeViewController: RecordMemoryViewControllerDelegate {
+    func didUploaded(_ viewController: RecordMemoryViewController) {
+        self.reload.onNext(())
+    }
+}
 
 #if DEBUG
 import SwiftUI

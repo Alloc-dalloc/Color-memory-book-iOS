@@ -11,7 +11,7 @@ import Then
 
 class HeaderView: UICollectionReusableView {
     let titleLabel = UILabel().then{
-        $0.font = UIFont.systemFont(ofSize: 18)
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     }
     
     override init(frame: CGRect) {

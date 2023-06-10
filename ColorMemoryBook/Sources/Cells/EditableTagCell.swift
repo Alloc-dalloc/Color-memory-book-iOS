@@ -8,7 +8,12 @@
 import UIKit
 import WSTagsField
 
+protocol EditableTagCellDelegate: AnyObject {
+    func onDidAddTag(_ tags: [String])
+}
+
 final class EditableTagCell: UICollectionViewCell {
+    weak var delegate: EditableTagCellDelegate?
     
     let tagBackgoundView = UIView().then{
         $0.backgroundColor = UIColor.ohsogo_Gray
@@ -23,8 +28,6 @@ final class EditableTagCell: UICollectionViewCell {
     }
     
     let tagsField = WSTagsField().then{
-        $0.placeholderAlwaysVisible = true
-        $0.placeholder = "태그 추가"
         $0.textField.returnKeyType = .continue
         $0.placeholderColor = .black
         
@@ -41,6 +44,10 @@ final class EditableTagCell: UICollectionViewCell {
     func setProperties(){
         tagsField.onDidSelectTagView = { field, tag in
             print("삭제 어떻게 하는데")
+        }
+        tagsField.onDidAddTag = { [weak self] _, _ in
+            guard let self = self else { return }
+            self.delegate?.onDidAddTag(self.tagsField.tags.compactMap { $0.text })
         }
     }
     

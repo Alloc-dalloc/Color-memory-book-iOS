@@ -8,13 +8,18 @@
 import Foundation
 
 struct ImageInfo: Decodable {
-    let imageURL: String
+    let colorAnalysis: [ColorAnalysis]
     let labels: [Label]
-    let colorAnalysis: [ColorAnalysis]  
+    let imageURL: String
+
+    enum CodingKeys: String, CodingKey {
+        case colorAnalysis, labels
+        case imageURL = "imageUrl"
+    }
 }
 
 // MARK: - ColorAnalysis
-struct ColorAnalysis: Decodable {
+struct ColorAnalysis: Codable {
     let colorName: String
     let colorPercentage: Int
 }
