@@ -141,14 +141,7 @@ class HomeViewController: BaseViewController{
     }
     
     override func bind() {
-        reload
-            .debug()
-            .map { _ in }
-            .bind(to: viewModel.viewWillAppear)
-            .disposed(by: disposeBag)
-
         rx.viewWillAppear
-            .take(1)
             .map { _ in }
             .bind(to: viewModel.viewWillAppear)
             .disposed(by: disposeBag)
@@ -248,8 +241,20 @@ extension HomeViewController: PHPickerViewControllerDelegate{
             itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) {[weak self] data, error in
                 if let data = data, let image = UIImage(data: data) {
                     DispatchQueue.main.async {
-                        guard let removeBackgroundImage = BackgroundRemoval().removeBackground(image: image, maskOnly: false).pngData() else { return }
-                        let nextVC = RecordMemoryViewController(imageData: removeBackgroundImage)
+                        let removeBackgroundImage = BackgroundRemoval().removeBackground(image: image, maskOnly: false)
+                        let imageView = UIImageView(image: removeBackgroundImage)
+                        let layer = imageView.layer
+
+                        UIGraphicsBeginImageContextWithOptions(layer.frame.size, layer.isOpaque, 0.0)
+
+                        layer.render(in: UIGraphicsGetCurrentContext()!)
+
+                        let image2 = UIGraphicsGetImageFromCurrentImageContext()
+
+                        UIGraphicsEndImageContext()
+
+                        guard let image2 = image2?.pngData() else { return }
+                        let nextVC = RecordMemoryViewController(imageData: image2)
                         nextVC.delegate = self
                         self?.navigationController?.pushViewController(nextVC, animated: true)
                     }
