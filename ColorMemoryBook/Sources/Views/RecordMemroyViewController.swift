@@ -98,14 +98,6 @@ class RecordMemoryViewController: BaseViewController {
     }
     
     override func bind() {
-        rx.viewDidLoad
-            .subscribe(onNext: { [weak self] _ in
-                self?.animationView.play()
-                self?.view.isUserInteractionEnabled = false
-                self?.view.alpha = 0.5
-            })
-            .disposed(by: disposeBag)
-
         rx.viewWillAppear
             .take(1)
             .map {[weak self] _ -> Data? in
@@ -114,14 +106,23 @@ class RecordMemoryViewController: BaseViewController {
             .compactMap { $0 }
             .bind(to: viewModel.viewWillAppear)
             .disposed(by: disposeBag)
+
+        rx.viewWillAppear
+            .take(1)
+            .subscribe(onNext: {[weak self] _ in
+                self?.animationView.play()
+                self?.collectionView.isHidden = true
+                self?.completeButton.isDisabled = true
+            })
+            .disposed(by: disposeBag)
         
         viewModel.detail
-            .compactMap{$0}
+            .compactMap{ $0 }
             .drive(onNext: { [weak self] detail in
                 self?.detail = detail
                 self?.animationView.stop()
-                self?.view.isUserInteractionEnabled = true
-                self?.view.alpha = 1
+                self?.collectionView.isHidden = false
+                self?.completeButton.isDisabled = false
                 self?.collectionView.reloadData()
             })
             .disposed(by: disposeBag)
