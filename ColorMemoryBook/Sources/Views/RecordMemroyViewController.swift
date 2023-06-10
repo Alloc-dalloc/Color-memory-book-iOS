@@ -84,7 +84,7 @@ class RecordMemoryViewController: BaseViewController {
     private var tag: [String] = []
     private var text: String = ""
     
-    init(imageData: Data) {
+    init(image: UIImage, imageData: Data) {
         let image = UIImage(data: imageData)
         self.imageData = imageData
         self.selectedImage = image!
