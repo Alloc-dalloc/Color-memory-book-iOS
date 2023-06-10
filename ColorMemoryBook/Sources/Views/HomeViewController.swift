@@ -248,8 +248,9 @@ extension HomeViewController: PHPickerViewControllerDelegate{
             itemProvider.loadDataRepresentation(forTypeIdentifier: UTType.image.identifier) {[weak self] data, error in
                 if let data = data, let image = UIImage(data: data) {
                     DispatchQueue.main.async {
-                        guard let removeBackgroundImage = BackgroundRemoval().removeBackground(image: image, maskOnly: false).pngData() else { return }
-                        let nextVC = RecordMemoryViewController(imageData: removeBackgroundImage)
+                        let removeBackgroundImage = BackgroundRemoval().removeBackground(image: image, maskOnly: false)
+                        guard let removeBackgroundImageData = removeBackgroundImage.pngData() else { return }
+                        let nextVC = RecordMemoryViewController(image: removeBackgroundImage, imageData: removeBackgroundImageData)
                         nextVC.delegate = self
                         self?.navigationController?.pushViewController(nextVC, animated: true)
                     }
