@@ -112,7 +112,7 @@ class RecordMemoryViewController: BaseViewController {
             .subscribe(onNext: {[weak self] _ in
                 self?.animationView.play()
                 self?.collectionView.isHidden = true
-                self?.completeButton.isDisabled = true
+                self?.completeButton.isEnabled = false
             })
             .disposed(by: disposeBag)
         
@@ -122,7 +122,7 @@ class RecordMemoryViewController: BaseViewController {
                 self?.detail = detail
                 self?.animationView.stop()
                 self?.collectionView.isHidden = false
-                self?.completeButton.isDisabled = false
+                self?.completeButton.isEnabled = true
                 self?.collectionView.reloadData()
             })
             .disposed(by: disposeBag)
