@@ -9,8 +9,13 @@ import UIKit
 import Lottie
 import RxSwift
 
+protocol RecordMemoryViewControllerDelegate: AnyObject {
+    func didUploaded(_ viewController: RecordMemoryViewController)
+}
+
 class RecordMemoryViewController: BaseViewController {
-    
+    weak var delegate: RecordMemoryViewControllerDelegate?
+
     private var selectedImage = UIImage()
     private let animationView = LottieAnimationView()
     private(set) lazy var collectionView: UICollectionView = {
@@ -153,7 +158,9 @@ class RecordMemoryViewController: BaseViewController {
         viewModel.isCompletedUpload
             .compactMap { $0 }
             .drive(onNext: { [weak self] _ in
-                self?.navigationController?.popViewController(animated: true)
+                guard let self = self else { return }
+                self.delegate?.didUploaded(self)
+                self.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
     }

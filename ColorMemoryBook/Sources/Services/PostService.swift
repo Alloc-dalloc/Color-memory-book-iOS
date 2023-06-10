@@ -58,8 +58,8 @@ extension PostService: BaseTargetType {
             let data = MultipartFormData(
                 provider: .data(imageData),
                 name: "image",
-                fileName: "image.jpeg",
-                mimeType: "image/jpeg"
+                fileName: "image.png",
+                mimeType: "image/png"
             )
             return .uploadMultipart([data])
             

@@ -23,8 +23,11 @@ class MemoryListViewModel{
     init(searchRepository: SearchRepository){
         self.searchRepository = searchRepository
 
-        let viewWillAppear = searchRepository
-            .fetchList(keyword: nil, cursor: nil)
+        let viewWillAppear = viewWillAppear
+            .flatMap { keyword in
+                return searchRepository.fetchList(keyword: "", cursor: nil)
+            }
+
 
         let search = searchTextSubject
             .flatMap { keyword in
